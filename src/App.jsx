@@ -78,7 +78,7 @@ add["LERP_HUMP"] = "0x0239311b645a8ef91dc899471497732a1085ba8b"
 
 add["STETH_PRICE"] = "0x911D7A8F87282C4111f621e2D100Aa751Bab1260"
 //add["MCD_CLIP_CALC_TUSD_A"] = "0x9B207AfAAAD1ae300Ea659e71306a7Bd6D81C160"
-add["PIP_CRVV1ETHSTETH"] = "0xEa508F82728927454bd3ce853171b0e2705880D4"
+// add["PIP_CRVV1ETHSTETH"] = "0xEa508F82728927454bd3ce853171b0e2705880D4"
 
 add["MCD_VEST_DAI_LEGACY"] = "0x2Cc583c0AaCDaC9e23CB601fDA8F1A0c56Cdcb71"
 add["MCD_VEST_DAI"] = "0xa4c22f0e25C6630B2017979AcF1f865e94695C4b"
@@ -136,8 +136,6 @@ const wbtc = build(add.WBTC, "ERC20")
 // const gusd = build(add.GUSD, "ERC20")
 
 const bkr = build(add.BKR, "ERC20")
-const adai = build(add.ADAI, "ERC20")
-const aaveLendingPool = build(add.MCD_JOIN_DIRECT_AAVEV2_DAI_POOL, "AaveLendingPoolV2")
 // const crvv1ethsteth = build(add.CRVV1ETHSTETH, "ERC20")
 // const cropJoin = build(add.MCD_JOIN_CRVV1ETHSTETH_A, "SynthetixJoin")
 const dai = build(add.MCD_DAI, "Dai")
@@ -149,17 +147,13 @@ const clip = build(add.MCD_CLIP_ETH_A, "Clipper") // FIXME are these all the sam
 const calc = build(add.MCD_CLIP_CALC_ETH_A, "StairstepExponentialDecrease")
 const flap = build(add.MCD_FLAP, "Flapper")
 const flop = build(add.MCD_FLOP, "Flopper")
-const d3mAdai = build(add.MCD_JOIN_DIRECT_AAVEV2_DAI, "DssDirectDepositAaveDai")
-const aaveIncentive = build(add.MCD_JOIN_DIRECT_AAVEV2_DAI_INCENTIVE, "StakedTokenIncentivesController")
 const pip = build(add.PIP_ETH, "OSM")
-const lerp = build(add.LERP_HUMP, "Lerp")
 const ethAIlkBytes = utils.formatBytes32String("ETH-A")
 const ethBIlkBytes = utils.formatBytes32String("ETH-B")
 const ethCIlkBytes = utils.formatBytes32String("ETH-C")
 const wbtcAIlkBytes = utils.formatBytes32String("WBTC-A")
 const wbtcBIlkBytes = utils.formatBytes32String("WBTC-B")
 const wbtcCIlkBytes = utils.formatBytes32String("WBTC-C")
-const d3madaiIlkBytes = utils.formatBytes32String("DIRECT-AAVEV2-DAI")
 window.utils = utils
 window.add = add
 window.vat = vat
@@ -289,18 +283,7 @@ class App extends Component {
       // FIXME show  end live, when, debt
       // FIXME lookup targetInterestRate (bar), need onchain helper function so can do with one multicall
       //[add.MCD_JOIN_DIRECT_AAVEV2_DAI, d3mAdai.interface.encodeFunctionData('calculateTargetSupply', [ethers.BigNumber.from('27500000000000000000000000')])],
-      [add.MCD_JOIN_DIRECT_AAVEV2_DAI, d3mAdai.interface.encodeFunctionData('bar', [])],
-      [add.MCD_DAI, dai.interface.encodeFunctionData('balanceOf', [add.ADAI])],
-      [add.MCD_VAT, vat.interface.encodeFunctionData('urns', [d3madaiIlkBytes, add.MCD_JOIN_DIRECT_AAVEV2_DAI])],
       // FIXME shoud be erc20 for token not adai? Is a interface for each gem required?
-      [add.MCD_JOIN_DIRECT_AAVEV2_DAI_VARIABLE, adai.interface.encodeFunctionData('totalSupply', [])],
-      [add.MCD_JOIN_DIRECT_AAVEV2_DAI_STABLE, adai.interface.encodeFunctionData('totalSupply', [])],
-      [add.MCD_JOIN_DIRECT_AAVEV2_DAI_POOL, aaveLendingPool.interface.encodeFunctionData('getReserveData', [add.MCD_DAI])],
-      [add.MCD_JOIN_DIRECT_AAVEV2_DAI_INCENTIVE, aaveIncentive.interface.encodeFunctionData('getRewardsBalance', [[add.ADAI], add.MCD_JOIN_DIRECT_AAVEV2_DAI])],
-      [add.LERP_HUMP, lerp.interface.encodeFunctionData('start', [])],
-      [add.LERP_HUMP, lerp.interface.encodeFunctionData('end', [])],
-      [add.LERP_HUMP, lerp.interface.encodeFunctionData('startTime', [])],
-      [add.LERP_HUMP, lerp.interface.encodeFunctionData('duration', [])]
 
     ].concat(this.getVestingCalls(add.MCD_VEST_DAI_LEGACY, vestDai, VEST_DAI_LEGACY_IDS))
       .concat(this.getVestingCalls(add.MCD_VEST_DAI, vestDai, VEST_DAI_IDS))
@@ -389,22 +372,10 @@ class App extends Component {
     const esmSum = esm.interface.decodeFunctionResult('Sum', res[offset++])[0]
     const endWait = end.interface.decodeFunctionResult('wait', res[offset++])[0]
     //const d3mAdaiTargetSupply = d3mAdai.interface.decodeFunctionResult('calculateTargetSupply', res[offset++])[0]
-    const d3mAdaiTargetSupply = ethers.BigNumber.from("0")
-    const d3mAdaiBar = d3mAdai.interface.decodeFunctionResult('bar', res[offset++])[0]
-    const d3mAdaiAvailableLiquidity = dai.interface.decodeFunctionResult('balanceOf', res[offset++])[0]
-    const d3mAdaiDaiDebt = vat.interface.decodeFunctionResult('urns', res[offset++])[1]
-    const d3mAdaiTotalSupplyVariable = adai.interface.decodeFunctionResult('totalSupply', res[offset++])[0]
-    const d3mAdaiTotalSupplyFixed = adai.interface.decodeFunctionResult('totalSupply', res[offset++])[0]
     //[, liquidityIndex, variableBorrowIndex, currentLiquidityRate, currentVariableBorrowRate,
     //currentStableBorrowRate, , aTokenAddress, stableDebtTokenAddress,
     //variableDebtTokenAddress, , ] = LendingPool.getReserveData(asset.address)
     // asset is the ERC20 deposited or borrowed, eg. DAI, WETH
-    const d3mAdaiReserve = aaveLendingPool.interface.decodeFunctionResult('getReserveData', res[offset++])[0]
-    const d3mAdaiIncentive = aaveIncentive.interface.decodeFunctionResult('getRewardsBalance', res[offset++])[0]
-    const lerpHumpStart = lerp.interface.decodeFunctionResult('start', res[offset++])[0]
-    const lerpHumpEnd = lerp.interface.decodeFunctionResult('end', res[offset++])[0]
-    const lerpHumpStartTime = lerp.interface.decodeFunctionResult('startTime', res[offset++])[0]
-    const lerpHumpDuration = lerp.interface.decodeFunctionResult('duration', res[offset++])[0]
 
     const ILK_CALL_COUNT = 17;
     const ILK_RWA_CALL_COUNT = 8;
@@ -430,12 +401,8 @@ class App extends Component {
     // const d3mAdaiFeesPending = ilksByName["DIRECT-AAVEV2-DAI"].lockedBn.sub(d3mAdaiDaiDebt)
     // const d3mAdaiTotalSupply =  d3mAdaiAvailableLiquidity.add(d3mAdaiTotalSupplyVariable.add(d3mAdaiTotalSupplyFixed))
     // const d3mAdaiAdjustment = ethers.BigNumber.from("0") //d3mAdaiTargetSupply.sub(d3mAdaiTotalSupply)
-    // const lerpHumpCurrent = this.getLerp(lerpHumpStart, lerpHumpEnd, lerpHumpStartTime, lerpHumpDuration, timestamp[0])
     // ilksByName["RWA009-A"]["conduitIn"] = ethers.BigNumber.from("0") // HV Bank has no input conduit
 
-    const d3mAdaiFeesPending = ethers.BigNumber.from("0")
-    const d3mAdaiTotalSupply = ethers.BigNumber.from("0")
-    const d3mAdaiAdjustment = ethers.BigNumber.from("0") //d3mAdaiTargetSupply.sub(d3mAdaiTotalSupply)
     const lerpHumpCurrent = ethers.BigNumber.from("0")
     // ilksByName["RWA009-A"]["conduitIn"] = ethers.BigNumber.from("0") // HV Bank has no input conduit
 
@@ -508,25 +475,6 @@ class App extends Component {
         endWait: endWait.toNumber(),
         optimisticDaiSupply: utils.formatEther(optimisticDaiSupply),
         starknetDaiSupply: utils.formatEther(starknetDaiSupply),
-        d3mAdaiTargetSupply: utils.formatEther(d3mAdaiTargetSupply),
-        d3mAdaiBar: utils.formatUnits(d3mAdaiBar, 27),
-        d3mAdaiAvailableLiquidity: utils.formatUnits(d3mAdaiAvailableLiquidity, 18),
-        d3mAdaiDaiDebt: utils.formatUnits(d3mAdaiDaiDebt, 18),
-        d3mAdaiFeesPending: utils.formatUnits(d3mAdaiFeesPending, 18),
-        d3mAdaiTotalSupplyVariable: utils.formatUnits(d3mAdaiTotalSupplyVariable, 18),
-        d3mAdaiTotalSupplyFixed: utils.formatUnits(d3mAdaiTotalSupplyFixed, 18),
-        d3mAdaiTotalSupply: utils.formatUnits(d3mAdaiTotalSupply, 18),
-        d3mAdaiAdjustment: utils.formatUnits(d3mAdaiAdjustment, 18),
-        d3mAdaiDepositAPR: utils.formatUnits(d3mAdaiReserve.currentLiquidityRate, 27),
-        d3mAdaiVariableBorrowAPR: utils.formatUnits(d3mAdaiReserve.currentVariableBorrowRate, 27),
-        d3mAdaiStableBorrowAPR: utils.formatUnits(d3mAdaiReserve.currentStableBorrowRate, 27),
-        d3mAdaiIncentive: utils.formatEther(d3mAdaiIncentive),
-        lerpHumpStart: utils.formatUnits(lerpHumpStart, 45),
-        lerpHumpEnd: utils.formatUnits(lerpHumpEnd, 45),
-        lerpHumpStartTime: this.unixToDate(lerpHumpStartTime),
-        lerpHumpDuration: lerpHumpDuration,
-        lerpHumpCurrent: utils.formatUnits(lerpHumpCurrent, 45),
-        lerpHumpAdjustment: utils.formatUnits(lerpHumpCurrent.sub(surplusBuffer), 45),
         historicalDebt,
       }
     })
@@ -538,18 +486,8 @@ class App extends Component {
     const clipAdd = add['MCD_CLIP_' + ilkSuffix]
     const calcAdd = add['MCD_CLIP_CALC_' + ilkSuffix]
     // use pip.zzz or pip.read depending if dsvalue or osm
-    if ([adai].includes(gem)) {
-      pipCall = [pipAdd, pip.interface.encodeFunctionData('read', [])]
-    } else {
-      pipCall = [pipAdd, pip.interface.encodeFunctionData('zzz', [])]
-    }
-
-    // locked tokens are in the rewards contract - use join.total() instead of gem.balanceOf()
-    // if (gem === crvv1ethsteth) {
-    //   lockedCall = [gemJoinAdd, cropJoin.interface.encodeFunctionData('total', [])]
-    // } else {
+    pipCall = [pipAdd, pip.interface.encodeFunctionData('zzz', [])]
     lockedCall = [gemAdd, gem.interface.encodeFunctionData('balanceOf', [gemJoinAdd])]
-    // }
 
     return [
       [add.MCD_VAT, vat.interface.encodeFunctionData('ilks', [ilkBytes])],
