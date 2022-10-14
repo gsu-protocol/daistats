@@ -133,7 +133,7 @@ const weth = build(add.ETH, "ERC20")
 // const tusd = build(add.TUSD, "ERC20")
 const wbtc = build(add.WBTC, "ERC20")
 // const pax = build(add.PAXUSD, "ERC20")
-const gusd = build(add.GUSD, "ERC20")
+// const gusd = build(add.GUSD, "ERC20")
 
 const bkr = build(add.BKR, "ERC20")
 const adai = build(add.ADAI, "ERC20")
@@ -538,7 +538,7 @@ class App extends Component {
     const clipAdd = add['MCD_CLIP_' + ilkSuffix]
     const calcAdd = add['MCD_CLIP_CALC_' + ilkSuffix]
     // use pip.zzz or pip.read depending if dsvalue or osm
-    if ([gusd, adai].includes(gem)) {
+    if ([adai].includes(gem)) {
       pipCall = [pipAdd, pip.interface.encodeFunctionData('read', [])]
     } else {
       pipCall = [pipAdd, pip.interface.encodeFunctionData('zzz', [])]
