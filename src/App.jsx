@@ -138,8 +138,8 @@ const wbtc = build(add.WBTC, "ERC20")
 const bkr = build(add.BKR, "ERC20")
 const adai = build(add.ADAI, "ERC20")
 const aaveLendingPool = build(add.MCD_JOIN_DIRECT_AAVEV2_DAI_POOL, "AaveLendingPoolV2")
-const crvv1ethsteth = build(add.CRVV1ETHSTETH, "ERC20")
-const cropJoin = build(add.MCD_JOIN_CRVV1ETHSTETH_A, "SynthetixJoin")
+// const crvv1ethsteth = build(add.CRVV1ETHSTETH, "ERC20")
+// const cropJoin = build(add.MCD_JOIN_CRVV1ETHSTETH_A, "SynthetixJoin")
 const dai = build(add.MCD_DAI, "Dai")
 const mkr = build(add.MCD_GOV, "DSToken")
 const chai = build(add.CHAI, "Chai")
@@ -545,11 +545,11 @@ class App extends Component {
     }
 
     // locked tokens are in the rewards contract - use join.total() instead of gem.balanceOf()
-    if (gem === crvv1ethsteth) {
-      lockedCall = [gemJoinAdd, cropJoin.interface.encodeFunctionData('total', [])]
-    } else {
-      lockedCall = [gemAdd, gem.interface.encodeFunctionData('balanceOf', [gemJoinAdd])]
-    }
+    // if (gem === crvv1ethsteth) {
+    //   lockedCall = [gemJoinAdd, cropJoin.interface.encodeFunctionData('total', [])]
+    // } else {
+    lockedCall = [gemAdd, gem.interface.encodeFunctionData('balanceOf', [gemJoinAdd])]
+    // }
 
     return [
       [add.MCD_VAT, vat.interface.encodeFunctionData('ilks', [ilkBytes])],
@@ -581,11 +581,11 @@ class App extends Component {
     const spotIlk = spot.interface.decodeFunctionResult('ilks', res[idx++])
     const autoLineIlk = autoline.interface.decodeFunctionResult('ilks', res[idx++])
     const dogIlk = dog.interface.decodeFunctionResult('ilks', res[idx++])
-    if (token === 'CRVV1ETHSTETH') {
-      locked = cropJoin.interface.decodeFunctionResult('total', res[idx++])[0]
-    } else {
-      locked = gem.interface.decodeFunctionResult('balanceOf', res[idx++])[0]
-    }
+    // if (token === 'CRVV1ETHSTETH') {
+    //   locked = cropJoin.interface.decodeFunctionResult('total', res[idx++])[0]
+    // } else {
+    locked = gem.interface.decodeFunctionResult('balanceOf', res[idx++])[0]
+    // }
     const supply = gem.interface.decodeFunctionResult('totalSupply', res[idx++])[0]
 
     if (['USDC', 'TUSD', 'USDP', 'GUSD', 'ADAI'].includes(token)) {
