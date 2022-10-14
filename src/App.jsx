@@ -39,31 +39,13 @@ add["BALANCER_V2"] = "0xBA12222222228d8Ba445958a75a0704d566BF2C8" // confirm wha
 
 //add["MCD_FLIP_USDC_PSM_A"] = "0x507420100393b1Dc2e8b4C8d0F8A13B56268AC99"
 
-add["GOV_MULTISIG"] = "0x73f09254a81e1F835Ee442d1b3262c1f1d7A13ff"
 add["GOV_WALLET_1"] = "0x01D26f8c5cC009868A4BF66E268c17B057fF7A73"
 add["GOV_WALLET_2"] = "0xC818Ae5f27B76b4902468C6B02Fd7a089F12c07b"
 add["GOV_WALLET_3"] = "0xbfDD0E744723192f7880493b66501253C34e1241"
-add["RISK_MULTISIG"] = "0xd98ef20520048a35EdA9A202137847A62120d2d9"
 add["RISK_001_WALLET"] = "0xb386Bc4e8bAE87c3F67ae94Da36F385C100a370a"
-add["RWF_MULTISIG"] = "0x9e1585d9CA64243CE43D42f7dD7333190F66Ca09"
-add["GRO_MULTISIG"] = "0x7800C137A645c07132886539217ce192b9F0528e"
-add["CP_MULTISIG"] = "0x6A0Ce7dBb43Fe537E3Fd0Be12dc1882393895237"
-add["CP_MULTISIG_2"] = "0xDCAF2C84e1154c8DdD3203880e5db965bfF09B60"
+
 add["SES_AUDIT_MULTISIG"] = "0x87AcDD9208f73bFc9207e1f6F0fDE906bcA95cc6"
-add["SES_PERMANENT_TEAM_MULTISIG"] = "0xb5eB779cE300024EDB3dF9b6C007E312584f6F4f"
-add["SES_INCUBATION_PROGRAM_MULTISIG"] = "0x7c09Ff9b59BAAebfd721cbDA3676826aA6d7BaE8"
-add["SES_GRANTS_PROGRAM_MULTISIG"] = "0xf95eB8eC63D6059bA62b0A8A7F843c7D92f41de2"
-add["PE_MULTISIG"] = "0xe2c16c308b843eD02B09156388Cb240cEd58C01c"
-add["ORA_MULTISIG"] = "0x2d09B7b95f3F312ba6dDfB77bA6971786c5b50Cf"
-add["ORA_ER_MULTISIG"] = "0x53CCAA8E3beF14254041500aCC3f1D4edb5B6D24"
-add["COM_MULTISIG"] = "0x1eE3ECa7aEF17D1e74eD7C447CcBA61aC76aDbA9"
-add["COM_ER_MULTISIG"] = "0x99E1696A680c0D9f426Be20400E468089E7FDB0f"
-add["DAIF_WALLET"] = "0x34D8d61050Ef9D2B48Ab00e6dc8A8CA6581c5d63"
-add["DAIF_EF_WALLET"] = "0x5F5c328732c9E52DfCb81067b8bA56459b33921f"
-add["SNE_WALLET"] = "0x6D348f18c88D45243705D4fdEeB6538c6a9191F1"
-add["SH_WALLET"] = "0x955993Df48b0458A01cfB5fd7DF5F5DCa6443550"
 add["SH_MULTISIG"] = "0xc657aC882Fb2D6CcF521801da39e910F8519508d"
-add["IN_WALLET"] = "0x7327Aed0Ddf75391098e8753512D8aEc8D740a1F"
 add["SAS_WALLET"] = "0xb1f950a51516a697E103aaa69E152d839182f6Fe"
 add["IS_WALLET"] = "0xd1F2eEf8576736C1EbA36920B957cd2aF07280F4"
 add["DECO_WALLET"] = "0xF482D1031E5b172D42B2DAA1b6e5Cbf6519596f7"
@@ -957,9 +939,6 @@ class App extends Component {
           <div className="notification has-text-centered">
             { /* eslint-disable-next-line */}
             {t('daistats.block')}: <strong>{this.state.blockNumber}</strong> Time: <strong title={this.state.timestamp}>{this.state.timestampHHMM}</strong>. {this.state.paused ? `${t('daistats.pause')}.` : `${t('daistats.auto_updating')}.`} <a onClick={this.togglePause}>{this.state.paused ? t('daistats.restart') : t('daistats.pause')}</a>
-            <br />
-            Welcome Societe Generale 🇫🇷 and H.V. BANK 🏦
-            <br />
             <div className="buttons is-centered">
               <button className="button is-small is-rounded" onClick={() => this.props.toggle('en')}>English</button>
               <button className="button is-small is-rounded" onClick={() => this.props.toggle('es')}>Español</button>

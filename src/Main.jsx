@@ -497,7 +497,7 @@ const Main = (props) => {
             </div>
           </TabPanel>
           <TabPanel>
-            <div className="columns">
+            {/* <div className="columns">
               <div className="column">
                 <div className="box has-text-centered">
                   <a href={`${ETHERSCAN_URL}/address/${props.GOV_MULTISIG}`} target="_blank" rel="noopener noreferrer">
@@ -525,8 +525,8 @@ const Main = (props) => {
                   </a>
                 </div>
               </div>
-            </div>
-            <div className="columns">
+            </div> */}
+            {/* <div className="columns">
               <div className="column">
                 <div className="box has-text-centered">
                   <a href={`${ETHERSCAN_URL}/address/${props.IN_WALLET}`} target="_blank" rel="noopener noreferrer">
@@ -546,8 +546,8 @@ const Main = (props) => {
                   </a>
                 </div>
               </div>
-            </div>
-            <div className="columns">
+            </div> */}
+            {/* <div className="columns">
               <div className="column">
                 <div className="box has-text-centered">
                   <a href={`${ETHERSCAN_URL}/address/${props.RWF_MULTISIG}`} target="_blank" rel="noopener noreferrer">
@@ -567,8 +567,8 @@ const Main = (props) => {
                   </a>
                 </div>
               </div>
-            </div>
-            <div className="columns">
+            </div> */}
+            {/* <div className="columns">
               <div className="column">
                 <div className="box has-text-centered">
                   <a href={`${ETHERSCAN_URL}/address/${props.SES_AUDITORS_MULTISIG}`} target="_blank" rel="noopener noreferrer">
@@ -577,8 +577,8 @@ const Main = (props) => {
                   </a>
                 </div>
               </div>
-            </div>
-            <div className="columns">
+            </div> */}
+            {/* <div className="columns">
               <div className="column">
                 <div className="box has-text-centered">
                   <a href={`${ETHERSCAN_URL}/address/${props.SES_PERMANENT_TEAM_MULTISIG}`} target="_blank" rel="noopener noreferrer">
@@ -603,8 +603,8 @@ const Main = (props) => {
                   </a>
                 </div>
               </div>
-            </div>
-            <div className="columns">
+            </div> */}
+            {/* <div className="columns">
               <div className="column">
                 <div className="box has-text-centered">
                   <a href={`${ETHERSCAN_URL}/address/${props.SNE_WALLET}`} target="_blank" rel="noopener noreferrer">
@@ -621,8 +621,8 @@ const Main = (props) => {
                   </a>
                 </div>
               </div>
-            </div>
-            <div className="columns">
+            </div> */}
+            {/* <div className="columns">
               <div className="column">
                 <div className="box has-text-centered">
                   <a href={`${ETHERSCAN_URL}/address/${props.PE_MULTISIG}`} target="_blank" rel="noopener noreferrer">
@@ -631,8 +631,8 @@ const Main = (props) => {
                   </a>
                 </div>
               </div>
-            </div>
-            <div className="columns">
+            </div> */}
+            {/* <div className="columns">
               <div className="column">
                 <div className="box has-text-centered">
                   <a href={`${ETHERSCAN_URL}/address/${props.ORA_MULTISIG}`} target="_blank" rel="noopener noreferrer">
@@ -649,8 +649,8 @@ const Main = (props) => {
                   </a>
                 </div>
               </div>
-            </div>
-            <div className="columns">
+            </div> */}
+            {/* <div className="columns">
               <div className="column">
                 <div className="box has-text-centered">
                   <a href={`${ETHERSCAN_URL}/address/${props.DAIF_WALLET}`} target="_blank" rel="noopener noreferrer">
@@ -667,7 +667,7 @@ const Main = (props) => {
                   </a>
                 </div>
               </div>
-            </div>
+            </div> */}
             <hr />
             <div className="columns">
               <div className="column">
