@@ -129,10 +129,10 @@ const vestDai = build(add.MCD_VEST_DAI, "DssVestSuckable")
 const vestMkr = build(add.MCD_VEST_MKR, "DssVestMintable")
 const vestMkrTreasury = build(add.MCD_VEST_MKR_TREASURY, "DssVestTransferrable")
 const weth = build(add.ETH, "ERC20")
-const usdc = build(add.USDC, "ERC20")
-const tusd = build(add.TUSD, "ERC20")
+// const usdc = build(add.USDC, "ERC20")
+// const tusd = build(add.TUSD, "ERC20")
 const wbtc = build(add.WBTC, "ERC20")
-const pax = build(add.PAXUSD, "ERC20")
+// const pax = build(add.PAXUSD, "ERC20")
 const gusd = build(add.GUSD, "ERC20")
 
 const bkr = build(add.BKR, "ERC20")
@@ -151,7 +151,6 @@ const flap = build(add.MCD_FLAP, "Flapper")
 const flop = build(add.MCD_FLOP, "Flopper")
 const d3mAdai = build(add.MCD_JOIN_DIRECT_AAVEV2_DAI, "DssDirectDepositAaveDai")
 const aaveIncentive = build(add.MCD_JOIN_DIRECT_AAVEV2_DAI_INCENTIVE, "StakedTokenIncentivesController")
-const usdcPip = build(add.PIP_USDC, "DSValue")
 const pip = build(add.PIP_ETH, "OSM")
 const lerp = build(add.LERP_HUMP, "Lerp")
 const ethAIlkBytes = utils.formatBytes32String("ETH-A")
@@ -539,7 +538,7 @@ class App extends Component {
     const clipAdd = add['MCD_CLIP_' + ilkSuffix]
     const calcAdd = add['MCD_CLIP_CALC_' + ilkSuffix]
     // use pip.zzz or pip.read depending if dsvalue or osm
-    if ([usdc, tusd, pax, gusd, adai].includes(gem)) {
+    if ([gusd, adai].includes(gem)) {
       pipCall = [pipAdd, pip.interface.encodeFunctionData('read', [])]
     } else {
       pipCall = [pipAdd, pip.interface.encodeFunctionData('zzz', [])]
@@ -665,75 +664,6 @@ class App extends Component {
     return r;
   }
 
-  getPsmIlkCall = (ilkBytes, ilkSuffix, gem, gemAdd, pipAdd, psm) => {
-    const psmAdd = add['MCD_' + ilkSuffix]
-    const gemJoinAdd = add['MCD_JOIN_' + ilkSuffix]
-    const clipAdd = add['MCD_CLIP_' + ilkSuffix]
-    const calcAdd = add['MCD_CLIP_CALC_' + ilkSuffix]
-    return [
-      [psmAdd, psm.interface.encodeFunctionData('tin', [])], // 34
-      [psmAdd, psm.interface.encodeFunctionData('tout', [])],
-      [add.MCD_VAT, vat.interface.encodeFunctionData('ilks', [ilkBytes])],
-      [gemAdd, gem.interface.encodeFunctionData('balanceOf', [gemJoinAdd])], // 37
-      [clipAdd, clip.interface.encodeFunctionData('kicks', [])],
-      [add.MCD_DOG, dog.interface.encodeFunctionData('ilks', [ilkBytes])],
-      [add.MCD_IAM_AUTO_LINE, autoline.interface.encodeFunctionData('ilks', [ilkBytes])], // 40
-      [pipAdd, usdcPip.interface.encodeFunctionData('read', [])],
-      [gemAdd, gem.interface.encodeFunctionData('totalSupply', [])], // 42
-
-      [clipAdd, clip.interface.encodeFunctionData('buf', [])],
-      [clipAdd, clip.interface.encodeFunctionData('tail', [])], // 10
-      [clipAdd, clip.interface.encodeFunctionData('cusp', [])],
-      [clipAdd, clip.interface.encodeFunctionData('chip', [])],
-      [clipAdd, clip.interface.encodeFunctionData('tip', [])],
-      [clipAdd, clip.interface.encodeFunctionData('count', [])],
-      [calcAdd, calc.interface.encodeFunctionData('cut', [])], // 15
-      [calcAdd, calc.interface.encodeFunctionData('step', [])],
-    ]
-  }
-
-  getPsmIlkMap = (res, idx, token, ilkName, psm, dp, tokenDp, priceDp) => {
-    const tin = psm.interface.decodeFunctionResult('tin', res[idx++])[0]
-    const tout = psm.interface.decodeFunctionResult('tout', res[idx++])[0]
-    const ilk = vat.interface.decodeFunctionResult('ilks', res[idx++])
-    const locked = usdc.interface.decodeFunctionResult('balanceOf', res[idx++])[0]
-    const kicks = clip.interface.decodeFunctionResult('kicks', res[idx++])[0]
-    const dogIlk = dog.interface.decodeFunctionResult('ilks', res[idx++])
-    const autoLineIlk = autoline.interface.decodeFunctionResult('ilks', res[idx++])
-    const price = usdcPip.interface.decodeFunctionResult('read', res[idx++])[0]
-    const supply = usdc.interface.decodeFunctionResult('totalSupply', res[idx++])[0]
-    const priceBN = ethers.BigNumber.from(price).mul(priceDp)
-
-    return {
-      token: token,
-      ilk: ilkName,
-      Art: utils.formatUnits(locked, dp),
-      rate: 1,
-      line: utils.formatUnits(ilk.line, 45),
-      lineMax: utils.formatUnits(autoLineIlk.line, 45),
-      gap: utils.formatUnits(autoLineIlk.gap, 45),
-      ttl: autoLineIlk.ttl,
-      lastInc: this.unixToDateTime(autoLineIlk.lastInc),
-      chop: utils.formatUnits(dogIlk.chop, 18),
-      hole: utils.formatUnits(dogIlk.hole, 45),
-      dirt: utils.formatUnits(dogIlk.dirt, 45),
-      buf: utils.formatUnits(clip.interface.decodeFunctionResult('buf', res[idx++])[0], 27), // 57
-      tail: clip.interface.decodeFunctionResult('tail', res[idx++])[0],
-      cusp: utils.formatUnits(clip.interface.decodeFunctionResult('cusp', res[idx++])[0], 27),
-      chip: utils.formatUnits(clip.interface.decodeFunctionResult('chip', res[idx++])[0], 18),
-      tip: utils.formatUnits(clip.interface.decodeFunctionResult('tip', res[idx++])[0], 45),
-      count: clip.interface.decodeFunctionResult('count', res[idx++])[0],
-      cut: utils.formatUnits(calc.interface.decodeFunctionResult('cut', res[idx++])[0], 27),
-      step: calc.interface.decodeFunctionResult('step', res[idx++])[0],
-      kicks: kicks.toNumber(),
-      tin: utils.formatEther(tin),
-      tout: utils.formatEther(tout),
-      locked: utils.formatUnits(locked, dp),
-      supply: utils.formatUnits(supply, dp),
-      value: utils.formatUnits(locked.mul(tokenDp).mul(priceBN), 45),
-      valueBn: locked.mul(tokenDp).mul(priceBN)
-    }
-  }
 
   getVestingCalls = (address, vest, ids) => {
     var r = []
@@ -817,69 +747,6 @@ class App extends Component {
     // const json = await jsonFetch('https://api.coingecko.com/api/v3/simple/price?ids=maker%2Cdai&vs_currencies=usd');
     const json = {}
     return json;
-  }
-
-  // NOTE getMKRAnnualBurn is unused and incomplete atm
-  getMKRAnnualBurn = (
-    ethIlk, ethFee, ethBIlk, ethBFee, batIlk, batFee, wbtcIlk, wbtcFee, usdcIlk, usdcFee, usdcBIlk, usdcBFee, tusdIlk, tusdFee,
-    kncAIlk, kncAFee, zrxAIlk, zrxAFee, manaAFee, manaAIlk, paxAFee, paxAIlk, usdtAFee, usdtAIlk,
-    compAFee, compAIlk, lrcAFee, lrcAIlk, linkAFee, linkAIlk, savingsDai, potFee, mkrPrice) => {
-
-    const daiFromETH = utils.formatEther(ethIlk.Art) * utils.formatUnits(ethIlk.rate, 27)
-    const stabilityETH = ethFee / 100
-    const daiFromETHB = utils.formatEther(ethBIlk.Art) * utils.formatUnits(ethBIlk.rate, 27)
-    const stabilityETHB = ethBFee / 100
-    const daiFromBAT = utils.formatEther(batIlk.Art) * utils.formatUnits(batIlk.rate, 27)
-    const stabilityBAT = batFee / 100
-    const daiFromWBTC = utils.formatEther(wbtcIlk.Art) * utils.formatUnits(wbtcIlk.rate, 27)
-    const stabilityWBTC = wbtcFee / 100
-    const daiFromUSDC = utils.formatEther(usdcIlk.Art) * utils.formatUnits(usdcIlk.rate, 27)
-    const stabilityUSDC = usdcFee / 100
-    const daiFromUSDCB = utils.formatEther(usdcBIlk.Art) * utils.formatUnits(usdcBIlk.rate, 27)
-    const stabilityUSDCB = usdcBFee / 100
-    const daiFromTUSD = utils.formatEther(tusdIlk.Art) * utils.formatUnits(tusdIlk.rate, 27)
-    const stabilityTUSD = tusdFee / 100
-    const daiFromKNCA = utils.formatEther(kncAIlk.Art) * utils.formatUnits(kncAIlk.rate, 27)
-    const stabilityKNCA = kncAFee / 100
-    const daiFromZRXA = utils.formatEther(zrxAIlk.Art) * utils.formatUnits(zrxAIlk.rate, 27)
-    const stabilityZRXA = zrxAFee / 100
-    const daiFromMANAA = utils.formatEther(manaAIlk.Art) * utils.formatUnits(manaAIlk.rate, 27)
-    const stabilityMANAA = manaAFee / 100
-    const daiFromPAXA = utils.formatEther(paxAIlk.Art) * utils.formatUnits(paxAIlk.rate, 27)
-    const stabilityPAXA = paxAFee / 100
-    const daiFromUSDTA = utils.formatEther(usdtAIlk.Art) * utils.formatUnits(usdtAIlk.rate, 27)
-    const stabilityUSDTA = usdtAFee / 100
-    const daiFromCOMPA = utils.formatEther(compAIlk.Art) * utils.formatUnits(compAIlk.rate, 27)
-    const stabilityCOMPA = compAFee / 100
-    const daiFromLRCA = utils.formatEther(lrcAIlk.Art) * utils.formatUnits(lrcAIlk.rate, 27)
-    const stabilityLRCA = lrcAFee / 100
-    const daiFromLINKA = utils.formatEther(linkAIlk.Art) * utils.formatUnits(linkAIlk.rate, 27)
-    const stabilityLINKA = linkAFee / 100
-    const dsrDai = utils.formatUnits(savingsDai, 45)
-    const dsrRate = potFee / 100
-
-    const mkrAnnualBurn = (
-      ((daiFromETH * stabilityETH)
-        + (daiFromETHB * stabilityETHB)
-        + (daiFromBAT * stabilityBAT)
-        + (daiFromWBTC * stabilityWBTC)
-        + (daiFromUSDC * stabilityUSDC)
-        + (daiFromUSDCB * stabilityUSDCB)
-        + (daiFromTUSD * stabilityTUSD)
-        + (daiFromKNCA * stabilityKNCA)
-        + (daiFromZRXA * stabilityZRXA)
-        + (daiFromMANAA * stabilityMANAA)
-        + (daiFromPAXA * stabilityPAXA)
-        + (daiFromUSDTA * stabilityUSDTA)
-        + (daiFromCOMPA * stabilityCOMPA)
-        + (daiFromLRCA * stabilityLRCA)
-        + (daiFromLINKA * stabilityLINKA)
-        - (dsrDai * dsrRate)
-      )
-      / mkrPrice
-    )
-
-    return mkrAnnualBurn
   }
 
   getHistoricalDebt = async ({ blockInterval, periods }) => {
