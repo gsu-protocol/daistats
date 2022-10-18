@@ -24,20 +24,22 @@ const jsonFetch = url => fetch(url).then(res => res.json())
 
 const add = require('./addresses.json')
 add["CHIEF"] = add.MCD_ADM // MCD_ADM
-add["GEM_PIT"] = "0x69076e44a9C70a67D5b79d95795Aba299083c275"
 add["UNISWAP_DAI"] = "0x0000000000000000000000000000000000000000" // replace 0x0
 add["UNISWAP_MKR"] = "0x0000000000000000000000000000000000000000" // replace 0x0
-add["MULTICALL"] = "0xeefBa1e63905eF1D7ACbA5a8513c70307C1cE441" //v1
-add["MULTICALL"] = "0xcA11bde05977b3631167028862bE2a173976CA11" //v3
-add["CHAI"] = "0x06AF07097C9Eeb7fD685c692751D5C66dB49c215" // confirm what is this
-// CHAI is a contract ERC20 https://etherscan.io/address/0x06AF07097C9Eeb7fD685c692751D5C66dB49c215#code
-add["BKR"] = "0x0ff5E7B1a54387458F4dD2F04CDdA7D1246C34D9" // confirm what is this
-// BKR is a contract ERC20 https://etherscan.io/address/0x0ff5E7B1a54387458F4dD2F04CDdA7D1246C34D9#code
 add["OPTIMISTIC_DAI"] = "0x0000000000000000000000000000000000000000"  // replace 0x0
 add["OPTIMISTIC_MKR"] = "0x0000000000000000000000000000000000000000" // replace 0x0
-add["OPTIMISTIC_L1ESCROW"] = "0x467194771dAe2967Aef3ECbEDD3Bf9a310C76C65" // confirm what is this
+add["OPTIMISTIC_L1ESCROW"] = "0x0000000000000000000000000000000000000000" // confirm what is this
 add["OASIS_DEX"] = "0x0000000000000000000000000000000000000000" // replace 0x0
-add["BALANCER_V2"] = "0xBA12222222228d8Ba445958a75a0704d566BF2C8" // confirm what is this
+add["BALANCER_V2"] = "0x0000000000000000000000000000000000000000" // confirm what is this
+add["STARKNET_DAI_BRIDGE"] = "0x0000000000000000000000000000000000000000"
+add["STARKNET_DAI_ESCROW"] = "0x0000000000000000000000000000000000000000"
+add["MEDIAN_ETH"] = add["PIP_ETH"] // replace this with actual median contract
+add["MEDIAN_WBTC"] = add["PIP_WBTC"] // replace this with actual median contract
+add["CHAI"] = add["MCD_GOV"] // should replace this with right addresses
+add["BKR"] = add["MCD_GOV"]  // should replace this with right addresses
+add["GEM_PIT"] = add["MCD_GOV"]  // should replace this with right addresses
+
+// add["LERP_HUMP"] = "0x0239311b645a8ef91dc899471497732a1085ba8b"
 
 //add["MCD_FLIP_USDC_PSM_A"] = "0x507420100393b1Dc2e8b4C8d0F8A13B56268AC99"
 
@@ -67,29 +69,7 @@ add["BALANCER_V2"] = "0xBA12222222228d8Ba445958a75a0704d566BF2C8" // confirm wha
 // add["EVENTS_WALLET"] = "0x3D274fbAc29C92D2F624483495C0113B44dBE7d2"
 // add["KEEP3R_MANAGER"] = "0xc6A048550C9553F8Ac20fbdeB06f114c27ECcabb"
 
-add["MEDIAN_ETH"] = "0x64de91f5a373cd4c28de3600cb34c7c6ce410c85"
-add["MEDIAN_WBTC"] = "0xe0F30cb149fAADC7247E953746Be9BbBB6B5751f"
-// add["MEDIAN_AAVE"] = "0xe62872DFEbd323b03D27946f8e2491B454a69811"
-// add["MCD_JOIN_DIRECT_AAVEV2_DAI_STABLE"] = "0x778a13d3eeb110a4f7bb6529f99c000119a08e92"
-// add["MCD_JOIN_DIRECT_AAVEV2_DAI_VARIABLE"] = "0x6c3c78838c761c6ac7be9f59fe808ea2a6e4379d"
-// add["MCD_JOIN_DIRECT_AAVEV2_DAI_POOL"] = "0x7d2768de32b0b80b7a3454c06bdac94a69ddc7a9"
-// add["MCD_JOIN_DIRECT_AAVEV2_DAI_INCENTIVE"] = "0xd784927Ff2f95ba542BfC824c8a8a98F3495f6b5"
 
-//PIP_STETH: 0x79ED6619640C1c1d9F3E64555172406FE72788B7 add this to wsteth display? add wsteth median?
-// add["LERP_HUMP"] = "0x0239311b645a8ef91dc899471497732a1085ba8b"
-
-// add["STETH_PRICE"] = "0x911D7A8F87282C4111f621e2D100Aa751Bab1260"
-//add["MCD_CLIP_CALC_TUSD_A"] = "0x9B207AfAAAD1ae300Ea659e71306a7Bd6D81C160"
-// add["PIP_CRVV1ETHSTETH"] = "0xEa508F82728927454bd3ce853171b0e2705880D4"
-
-add["MCD_VEST_DAI_LEGACY"] = "0x2Cc583c0AaCDaC9e23CB601fDA8F1A0c56Cdcb71"
-add["MCD_VEST_DAI"] = "0xa4c22f0e25C6630B2017979AcF1f865e94695C4b"
-
-add["MCD_FLASH_LEGACY"] = "0x1EB4CF3A948E7D72A198fe073cCb8C7a948cD853"
-
-// add["STARKNET_DAI_BRIDGE"] = "0x659a00c33263d9254Fed382dE81349426C795BB6"
-add["STARKNET_DAI_ESCROW"] = "0x0437465dfb5B79726e35F08559B0cBea55bb585C"
-//STARKNET_ESCROW_MOM: 0xc238E3D63DfD677Fa0FA9985576f0945C581A266
 
 const reverseAddresses = Object.entries(add).reduce((add, [key, value]) => (add[value] = key, add), {})
 
@@ -121,7 +101,6 @@ const cat = build(add.MCD_CAT, "Cat")
 const dog = build(add.MCD_DOG, "Dog")
 const spot = build(add.MCD_SPOT, "Spotter")
 const autoline = build(add.MCD_IAM_AUTO_LINE, "DssAutoLine")
-const flashLegacy = build(add.MCD_FLASH_LEGACY, "DssFlashLegacy")
 const flash = build(add.MCD_FLASH, "DssFlash")
 const pause = build(add.MCD_PAUSE, "DSPause")
 const chief = build(add.CHIEF, "DSChief")
@@ -131,15 +110,8 @@ const vestDai = build(add.MCD_VEST_DAI, "DssVestSuckable")
 const vestMkr = build(add.MCD_VEST_MKR, "DssVestMintable")
 const vestMkrTreasury = build(add.MCD_VEST_MKR_TREASURY, "DssVestTransferrable")
 const weth = build(add.ETH, "ERC20")
-// const usdc = build(add.USDC, "ERC20")
-// const tusd = build(add.TUSD, "ERC20")
 const wbtc = build(add.WBTC, "ERC20")
-// const pax = build(add.PAXUSD, "ERC20")
-// const gusd = build(add.GUSD, "ERC20")
-
 const bkr = build(add.BKR, "ERC20")
-// const crvv1ethsteth = build(add.CRVV1ETHSTETH, "ERC20")
-// const cropJoin = build(add.MCD_JOIN_CRVV1ETHSTETH_A, "SynthetixJoin")
 const dai = build(add.MCD_DAI, "Dai")
 const mkr = build(add.MCD_GOV, "DSToken")
 const chai = build(add.CHAI, "Chai")
@@ -180,10 +152,9 @@ const DP18 = ethers.BigNumber.from("1")
 
 const HOP = 3600 // assumes all OSM's have same hop
 
-const VEST_DAI_LEGACY_IDS = 37
-const VEST_DAI_IDS = 8
-const VEST_MKR_TREASURY_IDS = 23
-// const VEST_MKR_TREASURY_IDS = 15
+const VEST_DAI_LEGACY_IDS = 0
+const VEST_DAI_IDS = 0
+const VEST_MKR_TREASURY_IDS = 0
 
 const subgraphClient = new GraphQLClient(
   "https://api.thegraph.com/subgraphs/name/protofire/maker-protocol",
@@ -236,6 +207,7 @@ class App extends Component {
       [add.MCD_VAT, vat.interface.encodeFunctionData('dai', [add.MCD_VOW])],
       [add.MCD_VAT, vat.interface.encodeFunctionData('sin', [add.MCD_VOW])],
       [add.MCD_DAI, dai.interface.encodeFunctionData('totalSupply', [])],
+      //12
 
       [add.MCD_GOV, mkr.interface.encodeFunctionData('balanceOf', [add.GEM_PIT])],
       [add.MCD_DAI, dai.interface.encodeFunctionData('balanceOf', [add.UNISWAP_DAI])],
@@ -243,17 +215,20 @@ class App extends Component {
       [add.MCD_DAI, dai.interface.encodeFunctionData('balanceOf', [add.BALANCER_V2])],
       [add.MCD_DAI, dai.interface.encodeFunctionData('balanceOf', [add.OPTIMISTIC_L1ESCROW])],
       [add.MCD_DAI, dai.interface.encodeFunctionData('balanceOf', [add.STARKNET_DAI_ESCROW])],
+      //18
 
       [add.MCD_POT, pot.interface.encodeFunctionData('Pie', [])],
       [add.MCD_POT, pot.interface.encodeFunctionData('chi', [])],
       [add.MCD_POT, pot.interface.encodeFunctionData('rho', [])],
       [add.CDP_MANAGER, manager.interface.encodeFunctionData('cdpi', [])],
       [add.MCD_JUG, jug.interface.encodeFunctionData('base', [])],
+      //23
 
       [add.MCD_POT, pot.interface.encodeFunctionData('dsr', [])],
       [add.CHAI, chai.interface.encodeFunctionData('totalSupply', [])],
       [add.MCD_GOV, mkr.interface.encodeFunctionData('totalSupply', [])],
       [add.MCD_VAT, vat.interface.encodeFunctionData('vice', [])],
+      //27
 
       [add.MCD_FLAP, flap.interface.encodeFunctionData('beg', [])],
       [add.MCD_FLAP, flap.interface.encodeFunctionData('ttl', [])],
@@ -266,44 +241,39 @@ class App extends Component {
       [add.MCD_FLOP, flop.interface.encodeFunctionData('ttl', [])],
       [add.MCD_FLOP, flop.interface.encodeFunctionData('tau', [])],
       [add.MCD_FLOP, flop.interface.encodeFunctionData('kicks', [])],
+      //38
 
       [add.MCD_GOV, mkr.interface.encodeFunctionData('balanceOf', [add.MCD_PAUSE_PROXY])],
       [add.BKR, bkr.interface.encodeFunctionData('totalSupply', [])],
       [add.MCD_GOV, mkr.interface.encodeFunctionData('balanceOf', [add.BKR])],
       [add.MCD_DOG, dog.interface.encodeFunctionData('Hole', [])],
       [add.MCD_DOG, dog.interface.encodeFunctionData('Dirt', [])],
+      //43
 
       [add.MCD_FLASH, flash.interface.encodeFunctionData('max', [])], // or use EIP 3156 maxFlashLoan(token)
-      // flash toll hardwired to 0
-      [add.MCD_FLASH_LEGACY, flashLegacy.interface.encodeFunctionData('max', [])],
-      [add.MCD_FLASH_LEGACY, flashLegacy.interface.encodeFunctionData('toll', [])],
       [add.MCD_PAUSE, pause.interface.encodeFunctionData('delay', [])],
       [add.CHIEF, chief.interface.encodeFunctionData('hat', [])],
       [add.MCD_ESM, esm.interface.encodeFunctionData('min', [])],
       [add.MCD_ESM, esm.interface.encodeFunctionData('Sum', [])],
       [add.MCD_END, end.interface.encodeFunctionData('wait', [])],
-      // FIXME show  end live, when, debt
-      // FIXME lookup targetInterestRate (bar), need onchain helper function so can do with one multicall
-      //[add.MCD_JOIN_DIRECT_AAVEV2_DAI, d3mAdai.interface.encodeFunctionData('calculateTargetSupply', [ethers.BigNumber.from('27500000000000000000000000')])],
-      // FIXME shoud be erc20 for token not adai? Is a interface for each gem required?
-
-    ].concat(this.getVestingCalls(add.MCD_VEST_DAI_LEGACY, vestDai, VEST_DAI_LEGACY_IDS))
-      .concat(this.getVestingCalls(add.MCD_VEST_DAI, vestDai, VEST_DAI_IDS))
-      .concat(this.getVestingCalls(add.MCD_VEST_MKR_TREASURY, vestMkrTreasury, VEST_MKR_TREASURY_IDS))
-      .concat(this.getIlkCall(ethAIlkBytes, 'ETH_A', weth, add.ETH, add.PIP_ETH))
-      .concat(this.getIlkCall(ethBIlkBytes, 'ETH_B', weth, add.ETH, add.PIP_ETH))
-      .concat(this.getIlkCall(ethCIlkBytes, 'ETH_C', weth, add.ETH, add.PIP_ETH))
-      .concat(this.getIlkCall(wbtcAIlkBytes, 'WBTC_A', wbtc, add.WBTC, add.PIP_WBTC))
-      .concat(this.getIlkCall(wbtcBIlkBytes, 'WBTC_B', wbtc, add.WBTC, add.PIP_WBTC))
-      .concat(this.getIlkCall(wbtcCIlkBytes, 'WBTC_C', wbtc, add.WBTC, add.PIP_WBTC))
+      //49
+    ]
+      .concat(this.getVestingCalls(add.MCD_VEST_DAI, vestDai, VEST_DAI_IDS)) // 0, 49
+      .concat(this.getVestingCalls(add.MCD_VEST_MKR_TREASURY, vestMkrTreasury, VEST_MKR_TREASURY_IDS)) // 0, 49
+      .concat(this.getIlkCall(ethAIlkBytes, 'ETH_A', weth, add.ETH, add.PIP_ETH)) // 17, 66
+      .concat(this.getIlkCall(ethBIlkBytes, 'ETH_B', weth, add.ETH, add.PIP_ETH)) // 17, 83 
+      .concat(this.getIlkCall(ethCIlkBytes, 'ETH_C', weth, add.ETH, add.PIP_ETH)) // 17, 100
+      .concat(this.getIlkCall(wbtcAIlkBytes, 'WBTC_A', wbtc, add.WBTC, add.PIP_WBTC)) // 17, 117
+      .concat(this.getIlkCall(wbtcBIlkBytes, 'WBTC_B', wbtc, add.WBTC, add.PIP_WBTC)) // 17, 134
+      .concat(this.getIlkCall(wbtcCIlkBytes, 'WBTC_C', wbtc, add.WBTC, add.PIP_WBTC)) // 17, 151
       , { blockTag: blockNumber })
     let promises = [
-      p1,
+      p1, // (0-151)
       this.etherscanEthSupply(),
-      this.getPrice(add.PIP_ETH, this.POSITION_NXT),
-      this.getPrice(add.MEDIAN_ETH, this.POSITION_MEDIAN_VAL),
-      this.getPrice(add.PIP_WBTC, this.POSITION_NXT),
-      this.getPrice(add.MEDIAN_WBTC, this.POSITION_MEDIAN_VAL),
+      this.getPrice(add.PIP_ETH, (add["PIP_TYPE_IS_OSM"] == "true") ? this.POSITION_NXT : 2),
+      this.getPrice(add.MEDIAN_ETH, (add["PIP_TYPE_IS_OSM"] == "true") ? this.POSITION_MEDIAN_VAL : 2),
+      this.getPrice(add.PIP_WBTC, (add["PIP_TYPE_IS_OSM"] == "true") ? this.POSITION_NXT : 2),
+      this.getPrice(add.MEDIAN_WBTC, (add["PIP_TYPE_IS_OSM"] == "true") ? this.POSITION_MEDIAN_VAL : 2),
       // this.getHistoricalDebt({ blockInterval: 45500 /* ≈ 7 day */, periods: 52 /* 12 months */ }),
     ]
 
@@ -366,8 +336,6 @@ class App extends Component {
     const dirt = dog.interface.decodeFunctionResult('Dirt', res[offset++])[0]
 
     const flashLine = flash.interface.decodeFunctionResult('max', res[offset++])[0]
-    const flashLegacyLine = flashLegacy.interface.decodeFunctionResult('max', res[offset++])[0]
-    const flashLegacyToll = flashLegacy.interface.decodeFunctionResult('toll', res[offset++])[0]
     const pauseDelay = pause.interface.decodeFunctionResult('delay', res[offset++])[0]
     const hat = chief.interface.decodeFunctionResult('hat', res[offset++])
     const esmMin = esm.interface.decodeFunctionResult('min', res[offset++])[0]
@@ -379,17 +347,19 @@ class App extends Component {
     //variableDebtTokenAddress, , ] = LendingPool.getReserveData(asset.address)
     // asset is the ERC20 deposited or borrowed, eg. DAI, WETH
 
+
     const ILK_CALL_COUNT = 17;
     const ILK_RWA_CALL_COUNT = 8;
     const ILK_PSM_CALL_COUNT = 17;
     const VEST_CALL_COUNT = 3
 
-    const vestingDaiLegacy = this.getVestingMaps(res, offset, vestDai, VEST_DAI_LEGACY_IDS)
+    // the offset will not change as both VEST_DAI_LEGACY_IDS and VEST_DAI_IDS is set to 0
     const vestingDai = this.getVestingMaps(res, offset += (VEST_DAI_LEGACY_IDS * VEST_CALL_COUNT), vestDai, VEST_DAI_IDS)
     const vestingMkrTreasury = this.getVestingMaps(res, offset += (VEST_DAI_IDS * VEST_CALL_COUNT), vestMkrTreasury, VEST_MKR_TREASURY_IDS)
 
+    // offset is 50 here (actual is 49 but we're storing offset++ so 50)
+
     const ilks = [
-      // 267 + 17
       this.getIlkMap(res, offset += (VEST_MKR_TREASURY_IDS * VEST_CALL_COUNT), "ETH", "ETH-A", weth, 18, base, ethPriceNxt, ethPriceMedian, DP10),
       this.getIlkMap(res, offset += ILK_CALL_COUNT, "ETH", "ETH-B", weth, 18, base, ethPriceNxt, ethPriceMedian, DP10),
       this.getIlkMap(res, offset += ILK_CALL_COUNT, "ETH", "ETH-C", weth, 18, base, ethPriceNxt, ethPriceMedian, DP10),
@@ -420,7 +390,6 @@ class App extends Component {
         debt: utils.formatUnits(debt, 45),
         ilks: ilks,
         ilksByName: ilksByName,
-        vestingDaiLegacy: vestingDaiLegacy,
         vestingDai: vestingDai,
         vestingMkrTreasury: vestingMkrTreasury,
         daiSupply: utils.formatEther(daiSupply),
@@ -468,8 +437,6 @@ class App extends Component {
         bkrSupply: utils.formatEther(bkrSupply),
         mkrBroken: utils.formatEther(mkrBroken),
         flashLine: utils.formatEther(flashLine),
-        flashLegacyLine: utils.formatEther(flashLegacyLine),
-        flashLegacyToll: utils.formatEther(flashLegacyToll),
         pauseDelay: pauseDelay.toNumber(),
         hat: hat,
         esmMin: utils.formatEther(esmMin),
@@ -481,14 +448,17 @@ class App extends Component {
       }
     })
   }
-
+  // Total calls: 17
   getIlkCall = (ilkBytes, ilkSuffix, gem, gemAdd, pipAdd) => {
     var pipCall, lockedCall;
     const gemJoinAdd = add['MCD_JOIN_' + ilkSuffix]
     const clipAdd = add['MCD_CLIP_' + ilkSuffix]
     const calcAdd = add['MCD_CLIP_CALC_' + ilkSuffix]
     // use pip.zzz or pip.read depending if dsvalue or osm
-    pipCall = [pipAdd, pip.interface.encodeFunctionData('zzz', [])]
+    if (add["PIP_TYPE_IS_OSM"] == "false")
+      pipCall = [pipAdd, pip.interface.encodeFunctionData('read', [])]
+    else
+      pipCall = [pipAdd, pip.interface.encodeFunctionData('zzz', [])]
     lockedCall = [gemAdd, gem.interface.encodeFunctionData('balanceOf', [gemJoinAdd])]
 
     return [
@@ -497,18 +467,18 @@ class App extends Component {
       [add.MCD_SPOT, spot.interface.encodeFunctionData('ilks', [ilkBytes])],
       // FIXME only include autoline when needed?
       [add.MCD_IAM_AUTO_LINE, autoline.interface.encodeFunctionData('ilks', [ilkBytes])],
-      [add.MCD_DOG, dog.interface.encodeFunctionData('ilks', [ilkBytes])], // 5
+      [add.MCD_DOG, dog.interface.encodeFunctionData('ilks', [ilkBytes])],
       lockedCall,
       [gemAdd, gem.interface.encodeFunctionData('totalSupply', [])],
       pipCall,
       [clipAdd, clip.interface.encodeFunctionData('buf', [])],
-      [clipAdd, clip.interface.encodeFunctionData('tail', [])], // 10
+      [clipAdd, clip.interface.encodeFunctionData('tail', [])],
       [clipAdd, clip.interface.encodeFunctionData('cusp', [])],
       [clipAdd, clip.interface.encodeFunctionData('chip', [])],
       [clipAdd, clip.interface.encodeFunctionData('tip', [])],
       [clipAdd, clip.interface.encodeFunctionData('count', [])],
       [clipAdd, clip.interface.encodeFunctionData('kicks', [])],
-      [calcAdd, calc.interface.encodeFunctionData('cut', [])], // 15
+      [calcAdd, calc.interface.encodeFunctionData('cut', [])],
       [calcAdd, calc.interface.encodeFunctionData('step', [])],
     ]
   }
@@ -521,13 +491,8 @@ class App extends Component {
     const spotIlk = spot.interface.decodeFunctionResult('ilks', res[idx++])
     const autoLineIlk = autoline.interface.decodeFunctionResult('ilks', res[idx++])
     const dogIlk = dog.interface.decodeFunctionResult('ilks', res[idx++])
-    // if (token === 'CRVV1ETHSTETH') {
-    //   locked = cropJoin.interface.decodeFunctionResult('total', res[idx++])[0]
-    // } else {
     locked = gem.interface.decodeFunctionResult('balanceOf', res[idx++])[0]
-    // }
     const supply = gem.interface.decodeFunctionResult('totalSupply', res[idx++])[0]
-
     if (['USDC', 'TUSD', 'USDP', 'GUSD', 'ADAI'].includes(token)) {
       zzz = null;
       //price = pip.interface.decodeFunctionResult('read', res[idx++])[0]
@@ -544,7 +509,8 @@ class App extends Component {
       valueBn = value.mul(WAD)
       value = utils.formatUnits(value, 27)
     } else {
-      zzz = pip.interface.decodeFunctionResult('zzz', res[idx++])
+      zzz = (add["PIP_TYPE_IS_OSM"] == "false") ? pip.interface.decodeFunctionResult('read', res[idx++]) :
+        pip.interface.decodeFunctionResult('zzz', res[idx++])
       price = spotIlk.mat.mul(ilk.spot).div(RAY);
 
       if (tokenDp) {
@@ -557,6 +523,8 @@ class App extends Component {
       valueBn = value
       value = utils.formatUnits(value, 45)
     }
+
+    console.log("ilk: ", ilkName, "priceNxt: ", priceNxt, "priceMedian: ",priceMedian, "value: ",value)
 
     const r = {
       token: token,

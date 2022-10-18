@@ -309,10 +309,10 @@ const Main = (props) => {
               <div className="column">
                 <div className="box has-text-centered">
                   <h3 className="title" title={props.mkrSupply}>{formatAmount.format(props.mkrSupply)}</h3>
-                  <p className="subtitle is-size-4">{t('daistats.token_supply', { token: 'GSUc' })}</p>
+                  <p className="subtitle is-size-4">{t('daistats.token_supply', { token: 'GSUp' })}</p>
                   <a href={`${ETHERSCAN_URL}/address/${props.MCD_PAUSE_PROXY}`} target="_blank" rel="noopener noreferrer">
                     <p className="subtitle is-size-6" title={props.protocolTreasury}>
-                      Protocol Treasury: {formatAmount.format(props.protocolTreasury)} GSUc
+                      Protocol Treasury: {formatAmount.format(props.protocolTreasury)} GSUp
                     </p>
                   </a>
                 </div>
@@ -391,8 +391,6 @@ const Main = (props) => {
                   <h3 className="title" title={props.flashLine}>{formatAmount.format(props.flashLine)}</h3>
                   <p className="title subtitle is-size-4">{/*t('daistats.flash_loan_limit')*/}GSUc Flash Loan Limit</p>
                   <p className="subtitle is-size-6">{/*t('daistats.fee')}*/}Fee: 0.00%</p>
-                  <p className="title subtitle is-size-6" title={props.flashLegacyLine}>Legacy Limit: {formatAmount.format(props.flashLegacyLine)}</p>
-                  <p className="title subtitle is-size-6">{/*t('daistats.fee')}*/}Legacy Fee: {formatPercent.format(props.flashLegacyToll)}</p>
                 </div>
               </div>
               <div className="column">
