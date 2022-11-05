@@ -33,8 +33,6 @@ add["OASIS_DEX"] = "0x0000000000000000000000000000000000000000" // replace 0x0
 add["BALANCER_V2"] = "0x0000000000000000000000000000000000000000" // confirm what is this
 add["STARKNET_DAI_BRIDGE"] = "0x0000000000000000000000000000000000000000"
 add["STARKNET_DAI_ESCROW"] = "0x0000000000000000000000000000000000000000"
-add["MEDIAN_ETH"] = add["PIP_ETH"] // replace this with actual median contract
-add["MEDIAN_WBTC"] = add["PIP_WBTC"] // replace this with actual median contract
 add["CHAI"] = add["MCD_GOV"] // should replace this with right addresses
 add["BKR"] = add["MCD_GOV"]  // should replace this with right addresses
 add["GEM_PIT"] = add["MCD_GOV"]  // should replace this with right addresses
@@ -258,8 +256,8 @@ class App extends Component {
       [add.MCD_END, end.interface.encodeFunctionData('wait', [])],
       //49
     ]
-      .concat(this.getVestingCalls(add.MCD_VEST_DAI, vestDai, VEST_DAI_IDS)) // 0, 49
-      .concat(this.getVestingCalls(add.MCD_VEST_MKR_TREASURY, vestMkrTreasury, VEST_MKR_TREASURY_IDS)) // 0, 49
+      // .concat(this.getVestingCalls(add.MCD_VEST_DAI, vestDai, VEST_DAI_IDS)) // 3, 52
+      // .concat(this.getVestingCalls(add.MCD_VEST_MKR_TREASURY, vestMkrTreasury, VEST_MKR_TREASURY_IDS)) // 3, 55
       .concat(this.getIlkCall(ethAIlkBytes, 'ETH_A', weth, add.ETH, add.PIP_ETH)) // 17, 66
       .concat(this.getIlkCall(ethBIlkBytes, 'ETH_B', weth, add.ETH, add.PIP_ETH)) // 17, 83 
       .concat(this.getIlkCall(ethCIlkBytes, 'ETH_C', weth, add.ETH, add.PIP_ETH)) // 17, 100
@@ -270,10 +268,10 @@ class App extends Component {
     let promises = [
       p1, // (0-151)
       this.etherscanEthSupply(),
-      this.getPrice(add.PIP_ETH, (add["PIP_TYPE_IS_OSM"] == "true") ? this.POSITION_NXT : 2),
-      this.getPrice(add.MEDIAN_ETH, (add["PIP_TYPE_IS_OSM"] == "true") ? this.POSITION_MEDIAN_VAL : 2),
-      this.getPrice(add.PIP_WBTC, (add["PIP_TYPE_IS_OSM"] == "true") ? this.POSITION_NXT : 2),
-      this.getPrice(add.MEDIAN_WBTC, (add["PIP_TYPE_IS_OSM"] == "true") ? this.POSITION_MEDIAN_VAL : 2),
+      this.getPrice(add.PIP_ETH, this.POSITION_NXT),
+      this.getPrice(add.MEDIAN_ETH, this.POSITION_MEDIAN_VAL),
+      this.getPrice(add.PIP_WBTC, this.POSITION_NXT),
+      this.getPrice(add.MEDIAN_WBTC, this.POSITION_MEDIAN_VAL),
       // this.getHistoricalDebt({ blockInterval: 45500 /* ≈ 7 day */, periods: 52 /* 12 months */ }),
     ]
 
@@ -354,13 +352,16 @@ class App extends Component {
     const VEST_CALL_COUNT = 3
 
     // the offset will not change as both VEST_DAI_LEGACY_IDS and VEST_DAI_IDS is set to 0
-    const vestingDai = this.getVestingMaps(res, offset += (VEST_DAI_LEGACY_IDS * VEST_CALL_COUNT), vestDai, VEST_DAI_IDS)
-    const vestingMkrTreasury = this.getVestingMaps(res, offset += (VEST_DAI_IDS * VEST_CALL_COUNT), vestMkrTreasury, VEST_MKR_TREASURY_IDS)
+    // const vestingDai = this.getVestingMaps(res, offset += (VEST_DAI_LEGACY_IDS * VEST_CALL_COUNT), vestDai, VEST_DAI_IDS)
+    // const vestingMkrTreasury = this.getVestingMaps(res, offset += (VEST_DAI_IDS * VEST_CALL_COUNT), vestMkrTreasury, VEST_MKR_TREASURY_IDS)
+
+    const vestingDai = {}
+    const vestingMkrTreasury = {}
 
     // offset is 50 here (actual is 49 but we're storing offset++ so 50)
-
     const ilks = [
-      this.getIlkMap(res, offset += (VEST_MKR_TREASURY_IDS * VEST_CALL_COUNT), "ETH", "ETH-A", weth, 18, base, ethPriceNxt, ethPriceMedian, DP10),
+      // this.getIlkMap(res, offset += (VEST_MKR_TREASURY_IDS * VEST_CALL_COUNT), "ETH", "ETH-A", weth, 18, base, ethPriceNxt, ethPriceMedian, DP10),
+      this.getIlkMap(res, offset, "ETH", "ETH-A", weth, 18, base, ethPriceNxt, ethPriceMedian, DP10),
       this.getIlkMap(res, offset += ILK_CALL_COUNT, "ETH", "ETH-B", weth, 18, base, ethPriceNxt, ethPriceMedian, DP10),
       this.getIlkMap(res, offset += ILK_CALL_COUNT, "ETH", "ETH-C", weth, 18, base, ethPriceNxt, ethPriceMedian, DP10),
       this.getIlkMap(res, offset += ILK_CALL_COUNT, "WBTC", "WBTC-A", wbtc, 8, base, wbtcPriceNxt, wbtcPriceMedian, DP10, DP8),
@@ -455,10 +456,7 @@ class App extends Component {
     const clipAdd = add['MCD_CLIP_' + ilkSuffix]
     const calcAdd = add['MCD_CLIP_CALC_' + ilkSuffix]
     // use pip.zzz or pip.read depending if dsvalue or osm
-    if (add["PIP_TYPE_IS_OSM"] == "false")
-      pipCall = [pipAdd, pip.interface.encodeFunctionData('read', [])]
-    else
-      pipCall = [pipAdd, pip.interface.encodeFunctionData('zzz', [])]
+    pipCall = [pipAdd, pip.interface.encodeFunctionData('zzz', [])]
     lockedCall = [gemAdd, gem.interface.encodeFunctionData('balanceOf', [gemJoinAdd])]
 
     return [
@@ -509,8 +507,7 @@ class App extends Component {
       valueBn = value.mul(WAD)
       value = utils.formatUnits(value, 27)
     } else {
-      zzz = (add["PIP_TYPE_IS_OSM"] == "false") ? pip.interface.decodeFunctionResult('read', res[idx++]) :
-        pip.interface.decodeFunctionResult('zzz', res[idx++])
+      zzz = pip.interface.decodeFunctionResult('zzz', res[idx++])
       price = spotIlk.mat.mul(ilk.spot).div(RAY);
 
       if (tokenDp) {
@@ -523,8 +520,6 @@ class App extends Component {
       valueBn = value
       value = utils.formatUnits(value, 45)
     }
-
-    console.log("ilk: ", ilkName, "priceNxt: ", priceNxt, "priceMedian: ",priceMedian, "value: ",value)
 
     const r = {
       token: token,

@@ -482,13 +482,13 @@ const Main = (props) => {
                 <div className="box has-text-centered">
                   <h3 className="title" title={props.bkrSupply}>{formatAmount.format(props.bkrSupply)}</h3>
                   <p className="title subtitle is-size-4">
-                    <a href={`${ETHERSCAN_URL}/token/${props.BKR}`} target="_blank" rel="noopener noreferrer">
+                    <a href='' rel="noopener noreferrer">
                       {t('daistats.token_supply', { token: 'Breaker (BKR)' })}
                     </a>
                   </p>
                   <p className="title subtitle is-size-6" title={props.mkrBroken}>GSUp Broken: {formatEightDp.format(props.mkrBroken)}</p>
                   <p className="title subtitle is-size-6">
-                    <a href="https://makerbreak.io/" target="_blank" rel="noopener noreferrer">Convert GSUp to BKR with Makerbreak.io</a>
+                    <a rel="noopener noreferrer">Convert GSUp to BKR with GSUbreak.io</a>
                   </p>
                 </div>
               </div>
@@ -794,7 +794,7 @@ const Main = (props) => {
           </TabPanel> */}
         </Tabs>
       </div>
-    </div>
+    </div >
   )
 }
 
