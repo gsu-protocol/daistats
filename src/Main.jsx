@@ -123,7 +123,7 @@ const Main = (props) => {
             <div className="columns">
               <div className="column">
                 <div className="box has-text-centered">
-                  <h3 className="title" title={props.sysLocked}>${formatAmount.format(props.sysLocked)}</h3>
+                  <h3 className="title gsu-font" title={props.sysLocked}>${formatAmount.format(props.sysLocked)}</h3>
                   <h4 className="subtitle is-size-4">{t('daistats.total_locked')}</h4>
                 </div>
               </div>
@@ -324,7 +324,7 @@ const Main = (props) => {
                   <h3 className="title" title={props.flopKicks}>{formatAmount.format(props.flopKicks)}</h3>
                   <p className="title subtitle is-size-4">{t('daistats.debt_flop_auctions')}</p>
                   <p className="title subtitle is-size-6">{t('daistats.initial_lot_size')}: {formatAmount.format(props.debtDump)} GSUc</p>
-                  <p className="title subtitle is-size-6">{t('daistats.initial_price')}: ${formatAmount.format(props.debtSize / props.debtDump)}</p>
+                  <p className="title subtitle is-size-6 gsu-font">{t('daistats.initial_price')}: ${formatAmount.format(props.debtSize / props.debtDump)}</p>
                   <p className="title subtitle is-size-6">Beg: {formatPercent.format(props.flopBeg - 1)} Pad: {formatPercent.format(props.flopPad - 1)}</p>
                   <p className="title subtitle is-size-6">Ttl: {props.flopTtl / 60}m Tau: {props.flopTau / 60 / 60}h</p>
                   <p className="title subtitle is-size-6">Flop delay: {props.flopDelay / 60 / 60}h</p>
