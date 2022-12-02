@@ -358,7 +358,7 @@ const Main = (props) => {
                 <div className="box has-text-centered">
                   <h3 className="title" title={props.dirt}>{formatAmount.format(props.dirt)}</h3>
                   <p className="title subtitle is-size-4" title="Aggregate Dai collection target of all active auctions across all collateral types">{/*t('daistats.Dirt')*/}Total Unbacked Dai including Penalties (Dirt)</p>
-                  <p className="subtitle is-size-6" title={props.hole}>t('daistats.Hole')Global Limit (Hole) {formatAmount.format(props.hole)}</p>
+                  <p className="subtitle is-size-6" title={props.hole}>Global Limit (Hole) {formatAmount.format(props.hole)}</p>
                 </div>
               </div>
             </div>
@@ -684,7 +684,7 @@ const Main = (props) => {
                   {/* <a href="https://tokenlists.org/token-list?url=https://daistats.com/makerdao.tokenlist.json" target="_blank" rel="noopener noreferrer">
                     <h3 className="title">MakerDAO Tokenlist v0.7.1</h3>
                   </a> */}
-                  <a href="/makerdao.tokenlist.json" target="_blank" rel="noopener noreferrer">
+                  <a href="/gsuprotocol.tokenlist.json" target="_blank" rel="noopener noreferrer">
                     <p className="subtitle is-size-7">{`gsuprotocol.tokenlist.json`}</p>
                   </a>
                 </div>
@@ -737,24 +737,6 @@ const Main = (props) => {
             </div>
 
             <hr />
-            <div className="columns">
-              <div className="column">
-                <div className="box has-text-centered">
-                  <a href={`https://optimistic.etherscan.io/token/${props.OPTIMISTIC_DAI}`} target="_blank" rel="noopener noreferrer">
-                    <h3 className="title"><i className="fal fa-file-code"></i> Optimistic GSUc</h3>
-                    <p className="subtitle is-size-7">{props.OPTIMISTIC_DAI}</p>
-                  </a>
-                </div>
-              </div>
-              <div className="column">
-                <div className="box has-text-centered">
-                  <a href={`https://optimistic.etherscan.io/token/${props.OPTIMISTIC_MKR}`} target="_blank" rel="noopener noreferrer">
-                    <h3 className="title"><i className="fal fa-file-code"></i> Optimistic GSUp</h3>
-                    <p className="subtitle is-size-7">{props.OPTIMISTIC_MKR}</p>
-                  </a>
-                </div>
-              </div>
-            </div>
           </TabPanel>
           {/* <TabPanel>
             <div className="columns">

@@ -1,0 +1,7 @@
+{
+  "maker.collateral": "Garanție",
+  "maker.debt_ceiling": "Plafon datorie",
+  "maker.liquidation_ratio": "Raport lichidare",
+  "maker.penalty": "Penalizare",
+  "maker.vault": "Vault"
+}
