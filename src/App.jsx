@@ -13,7 +13,7 @@ import Main from './Main'
 import Dai from './Dai'
 import daiLogo from './dai-pixel.png'
 import { configs } from "./config"
-const { ETHERSCAN_ETHSUPPLY_URL } = configs
+const { ETHERSCAN_ETHSUPPLY_URL, NETWORK_ID } = configs
 
 // import confetti from './confetti'
 
@@ -742,7 +742,7 @@ class App extends Component {
             </figure>
             <br />
             <progress className="progress is-small is-primary" max="100">15%</progress>
-            <p>{t('daistats.one_sec')}</p>
+            <p>{NETWORK_ID == 5 ? "One sec, fetching data from Ethereum Testnet..." : t('daistats.one_sec')}</p>
           </div>
         </section>
       )

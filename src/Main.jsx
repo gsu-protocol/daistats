@@ -357,7 +357,7 @@ const Main = (props) => {
               <div className="column">
                 <div className="box has-text-centered">
                   <h3 className="title" title={props.dirt}>{formatAmount.format(props.dirt)}</h3>
-                  <p className="title subtitle is-size-4" title="Aggregate Dai collection target of all active auctions across all collateral types">{/*t('daistats.Dirt')*/}Total Unbacked Dai including Penalties (Dirt)</p>
+                  <p className="title subtitle is-size-4" title="Aggregate GSUc collection target of all active auctions across all collateral types">{/*t('daistats.Dirt')*/}Total Unbacked GSUc including Penalties (Dirt)</p>
                   <p className="subtitle is-size-6" title={props.hole}>Global Limit (Hole) {formatAmount.format(props.hole)}</p>
                 </div>
               </div>
@@ -482,7 +482,7 @@ const Main = (props) => {
                 <div className="box has-text-centered">
                   <h3 className="title" title={props.bkrSupply}>{formatAmount.format(props.bkrSupply)}</h3>
                   <p className="title subtitle is-size-4">
-                    <a href='' rel="noopener noreferrer">
+                    <a rel="noopener noreferrer">
                       {t('daistats.token_supply', { token: 'Breaker (BKR)' })}
                     </a>
                   </p>
