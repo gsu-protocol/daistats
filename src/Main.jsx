@@ -1,11 +1,9 @@
 import React from 'react'
 import { useTranslate } from 'react-polyglot';
 import Collateral from './components/Collateral';
-import Psm from './components/Psm';
 import Pip from './components/Pip'
 import CollateralChart from './components/CollateralChart';
 import Clip from './components/Clip';
-import Vest from './components/Vest';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { useLocation, useHistory } from "react-router-dom";
@@ -98,7 +96,7 @@ const Main = (props) => {
             <div className="columns">
               <div className="column">
                 <div className="box has-text-centered">
-                  <h3 className="title" title={props.debt}>
+                  <h3 className="title" >
                     {props.debt >= 420000000 && props.debt < 421000000 && <span role="img" aria-label="Tree">🌲</span>} {formatAmount.format(props.debt)} / {formatAmount.format(props.Line)}
                   </h3>
                   <h4 className="subtitle is-size-3">{t('daistats.total_token', { token: 'GSUc' })}</h4>
@@ -123,13 +121,13 @@ const Main = (props) => {
             <div className="columns">
               <div className="column">
                 <div className="box has-text-centered">
-                  <h3 className="title gsu-font" title={props.sysLocked}>${formatAmount.format(props.sysLocked)}</h3>
+                  <h3 className="title gsu-font" >${formatAmount.format(props.sysLocked)}</h3>
                   <h4 className="subtitle is-size-4">{t('daistats.total_locked')}</h4>
                 </div>
               </div>
               <div className="column">
                 <div className="box has-text-centered">
-                  <h3 className="title" title={sysCollat}>{formatPercent.format(sysCollat)}</h3>
+                  <h3 className="title" title={formatPercent.format(sysCollat)}>{formatPercent.format(sysCollat)}</h3>
                   <h4 className="title subtitle is-size-4">{t('daistats.collat_ratio')}</h4>
                 </div>
               </div>
@@ -382,30 +380,30 @@ const Main = (props) => {
             <div className="columns">
               <div className="column">
                 <div className="box has-text-centered">
-                  <h3 className="title" title={props.pauseDelay}>{props.pauseDelay / 60 / 60}h</h3>
+                  <h3 className="title" title={`${props.pauseDelay / 60 / 60}h`}>{props.pauseDelay / 60 / 60}h</h3>
                   <p className="title subtitle is-size-4">{/*t('daistats.gsm_pause_delay')*/}GSM Pause Delay</p>
                 </div>
               </div>
               <div className="column">
                 <div className="box has-text-centered">
-                  <h3 className="title" title={props.flashLine}>{formatAmount.format(props.flashLine)}</h3>
+                  <h3 className="title" title={formatAmount.format(props.flashLine)}>{formatAmount.format(props.flashLine)}</h3>
                   <p className="title subtitle is-size-4">{/*t('daistats.flash_loan_limit')*/}GSUc Flash Loan Limit</p>
                   <p className="subtitle is-size-6">{/*t('daistats.fee')}*/}Fee: 0.00%</p>
                 </div>
               </div>
               <div className="column">
                 <div className="box has-text-centered">
-                  <h3 className="title" title={props.esmMin}>{formatAmount.format(props.esmMin)}</h3>
+                  <h3 className="title" title={formatAmount.format(props.esmMin)}>{formatAmount.format(props.esmMin)}</h3>
                   <p className="title subtitle is-size-4">{/*t('daistats.esm_threshold')*/}ESM Threshold</p>
-                  <p className="subtitle is-size-6" title={props.esmSum}>{/*t('daistats.total_MKR_burned')}*/}Total GSUc Burned: {formatSixDp.format(props.esmSum)}</p>
-                  <p className="title subtitle is-size-6" title={props.endWait}>{/*t('daistats.end_wait')}*/}ESM Delay: {props.endWait / 60 / 60}h</p>
+                  <p className="subtitle is-size-6" title={formatSixDp.format(props.esmSum)}>{/*t('daistats.total_MKR_burned')}*/}Total GSUc Burned: {formatSixDp.format(props.esmSum)}</p>
+                  <p className="title subtitle is-size-6" title={`${props.endWait / 60 / 60}h}`}>{/*t('daistats.end_wait')}*/}ESM Delay: {props.endWait / 60 / 60}h</p>
                 </div>
               </div>
             </div>
             <div className="columns">
               <div className="column">
                 <div className="box has-text-centered">
-                  <h3 className="title" title={props.daiSupply}>
+                  <h3 className="title" title={formatAmount.format(props.daiSupply)}>
                     {formatAmount.format(props.daiSupply)}
                   </h3>
                   <p className="subtitle is-size-4">{
@@ -415,7 +413,7 @@ const Main = (props) => {
               </div>
               <div className="column">
                 <div className="box has-text-centered">
-                  <h3 className="title" title={props.savingsDai}>{formatAmount.format(props.savingsDai)}</h3>
+                  <h3 className="title" title={formatAmount.format(props.savingsDai)}>{formatAmount.format(props.savingsDai)}</h3>
                   <p className="title subtitle is-size-4">{t('daistats.dai_in_dsr')}
                     ({formatAmount.format(props.savingsDai / props.debt * 100)}%)</p>
                   <p className="subtitle is-size-6">({t('daistats.pie_in_dsr')}: {formatAmount.format(props.savingsPie)})</p>
@@ -424,7 +422,7 @@ const Main = (props) => {
 
               <div className="column">
                 <div className="box has-text-centered">
-                  <h3 className="title" title={props.potFee}>{formatPercent.format(props.potFee)}</h3>
+                  <h3 className="title" title={formatPercent.format(props.potFee)}>{formatPercent.format(props.potFee)}</h3>
                   <p className="title subtitle is-size-4">{t('daistats.dai_savings_rate')}</p>
                   <p className="subtitle is-size-6">{t('daistats.last_drip')}: {props.potDrip}</p>
                 </div>
@@ -433,7 +431,7 @@ const Main = (props) => {
             <div className="columns">
               <div className="column">
                 <div className="box has-text-centered">
-                  <h3 className="title" title={props.optimisticDaiSupply}>{formatAmount.format(props.optimisticDaiSupply)}</h3>
+                  <h3 className="title" title={formatAmount.format(props.optimisticDaiSupply)}>{formatAmount.format(props.optimisticDaiSupply)}</h3>
                   <p className="subtitle is-size-4">{t('daistats.token_in_dex', { token: 'GSUc', dex: 'Optimism' })}</p>
                   <p className="title subtitle is-size-6">
                     <a href="https://gateway.optimism.io/" target="_blank" rel="noopener noreferrer">
@@ -445,13 +443,13 @@ const Main = (props) => {
               </div>
               <div className="column">
                 <div className="box has-text-centered">
-                  <h3 className="title" title={props.starknetDaiSupply}>{formatAmount.format(props.starknetDaiSupply)}</h3>
+                  <h3 className="title" title={formatAmount.format(props.starknetDaiSupply)}>{formatAmount.format(props.starknetDaiSupply)}</h3>
                   <p className="subtitle is-size-4">{t('daistats.token_in_dex', { token: 'GSUc', dex: 'Starknet' })}</p>
                 </div>
               </div>
               <div className="column">
                 <div className="box has-text-centered">
-                  <h3 className="title" title={props.balancerV2Dai}>{formatAmount.format(props.balancerV2Dai)}</h3>
+                  <h3 className="title" title={formatAmount.format(props.balancerV2Dai)}>{formatAmount.format(props.balancerV2Dai)}</h3>
                   <p className="subtitle is-size-4">{t('daistats.token_in_dex', { token: 'GSUc', dex: 'Balancer V2' })}</p>
                 </div>
               </div>
@@ -459,20 +457,20 @@ const Main = (props) => {
             <div className="columns">
               <div className="column">
                 <div className="box has-text-centered">
-                  <h3 className="title" title={props.chaiSupply}>{formatAmount.format(props.chaiSupply)}</h3>
+                  <h3 className="title" title={0}>{0}</h3>
                   <p className="title subtitle is-size-4">{t('daistats.token_supply', { token: 'Chai' })} <span role="img" aria-label="chai">🍵</span></p>
                   <p className="subtitle is-size-6">({t('daistats.dai_brewing')}: {formatAmount.format(props.daiBrewing)})</p>
                 </div>
               </div>
               <div className="column">
                 <div className="box has-text-centered">
-                  <h3 className="title" title={props.oasisDexDai}>{formatAmount.format(props.oasisDexDai)}</h3>
+                  <h3 className="title" title={formatAmount.format(props.oasisDexDai)}>{formatAmount.format(props.oasisDexDai)}</h3>
                   <p className="subtitle is-size-4">{t('daistats.token_in_dex', { token: 'GSUc', dex: 'Oasis Dex' })}</p>
                 </div>
               </div>
               <div className="column">
                 <div className="box has-text-centered">
-                  <h3 className="title" title={props.uniswapDai}>{formatAmount.format(props.uniswapDai)}</h3>
+                  <h3 className="title" title={formatAmount.format(props.uniswapDai)}>{formatAmount.format(props.uniswapDai)}</h3>
                   <p className="subtitle is-size-4">{t('daistats.token_in_dex', { token: 'GSUc', dex: 'Uniswap V2 (GSUc/ETH)' })}</p>
                 </div>
               </div>
@@ -480,13 +478,13 @@ const Main = (props) => {
             <div className="columns">
               <div className="column">
                 <div className="box has-text-centered">
-                  <h3 className="title" title={props.bkrSupply}>{formatAmount.format(props.bkrSupply)}</h3>
+                  <h3 className="title" title={0}>{0}</h3>
                   <p className="title subtitle is-size-4">
                     <a rel="noopener noreferrer">
                       {t('daistats.token_supply', { token: 'Breaker (BKR)' })}
                     </a>
                   </p>
-                  <p className="title subtitle is-size-6" title={props.mkrBroken}>GSUp Broken: {formatEightDp.format(props.mkrBroken)}</p>
+                  <p className="title subtitle is-size-6" title={formatEightDp.format(props.mkrBroken)}>GSUp Broken: {formatEightDp.format(props.mkrBroken)}</p>
                   <p className="title subtitle is-size-6">
                     <a rel="noopener noreferrer">Convert GSUp to BKR with GSUbreak.io</a>
                   </p>
