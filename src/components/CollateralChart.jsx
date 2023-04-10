@@ -11,29 +11,9 @@ const COLORS = ["hsl(347, 100%, 68%)",
     "hsl(308, 100%, 61%)"]
 
 const ILK_TO_COLOUR = {
-    "USDC": "hsl(347, 100%, 68%)",
-    "PSM-USDC-A": "hsl(347, 100%, 68%)",
-    "GUNIV3DAIUSDC1": "hsl(347, 100%, 68%)",
-    "GUNIV3DAIUSDC1-A": "hsl(347, 100%, 68%)",
-    "GUNIV3DAIUSDC2": "hsl(347, 100%, 68%)",
-    "GUNIV3DAIUSDC2-A": "hsl(347, 100%, 68%)",
-    "UNIV2DAIUSDC": "hsl(347, 100%, 68%)",
-    "UNIV2DAIUSDC-A": "hsl(347, 100%, 68%)",
     "ETH": "hsl(217, 71%, 53%)",
     "ETH-A": "hsl(217, 71%, 53%)",
     "ETH-B": "hsl(48, 100%, 67%)",
-    "ETH-C": "hsl(48, 100%, 67%)",
-    "WSTETH": "hsl(217, 71%, 43%)",
-    "WSTETH-A": "hsl(217, 71%, 43%)",
-    "WSTETH-B": "hsl(217, 71%, 43%)",
-    "WBTC": "hsl(141, 71%, 48%)",
-    "WBTC-A": "hsl(141, 71%, 48%)",
-    "WBTC-C": "hsl(141, 71%, 48%)",
-    "USDC-A": "hsl(204, 86%, 53%)",
-    "USDP": "hsl(308, 100%, 29%)",
-    "PSM-USDP-A": "hsl(308, 100%, 29%)",
-    "ADAI": "hsl(308, 34%, 51%)",
-    "DIRECT-AAVEV2-DAI": "hsl(308, 34%, 51%)",
     "Others": "hsl(348, 100%, 61%)"}
 
 // bluma light
