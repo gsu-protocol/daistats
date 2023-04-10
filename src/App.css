@@ -1,3 +1,23 @@
+@font-face {
+    font-family: 'GSU font';
+    src: url('./fonts/GSUFont/GSU-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'GSU font';
+    src: url('./fonts/GSUFont/GSU-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+:root {
+    --GSU-font: "GSU font", BlinkMacSystemFont, -apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.gsu-font{
+    font-family: var(--GSU-font);
+}
 .box {
     height: 100%;
 }

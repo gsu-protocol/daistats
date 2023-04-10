@@ -29,7 +29,7 @@
       "symbol": "GSUc",
       "name": "GSUc Stablecoin",
       "decimals": 18,
-      "logoURI": "https://github.com/block360/daistats/blob/updates-daistats/public/dai.png?raw=true",
+
       "tags": ["stablecoin"]
     },
     {
@@ -38,7 +38,6 @@
       "symbol": "GSUc",
       "name": "GSUc Stablecoin",
       "decimals": 18,
-      "logoURI": "https://github.com/block360/daistats/blob/updates-daistats/public/dai.png?raw=true",
       "tags": ["stablecoin"]
     },
     {
@@ -46,16 +45,14 @@
       "address": "0x0000000000000000000000000000000000000000",
       "symbol": "GSUp",
       "name": "GSUp",
-      "decimals": 18,
-      "logoURI": "https://github.com/block360/daistats/blob/updates-daistats/public/dai.png?raw=true"
+      "decimals": 18
     },
     {
       "chainId": 5,
       "address": "0xc4Ea8cE98436B58cc51F7D2d501e27dbbA0066f2",
       "symbol": "GSUp",
       "name": "GSUp",
-      "decimals": 18,
-      "logoURI": "https://github.com/block360/daistats/blob/updates-daistats/public/dai.png?raw=true"
+      "decimals": 18
     },
     {
       "chainId": 1,
