@@ -15,8 +15,6 @@ import daiLogo from './dai-pixel.png'
 import { configs } from "./config"
 const { ETHERSCAN_ETHSUPPLY_URL, NETWORK_ID } = configs
 
-// import confetti from './confetti'
-
 const ethers = require('ethers')
 const utils = ethers.utils
 
@@ -36,37 +34,6 @@ add["STARKNET_DAI_ESCROW"] = "0x0000000000000000000000000000000000000000"
 add["CHAI"] = add["MCD_GOV"] // should replace this with right addresses
 add["BKR"] = add["MCD_GOV"]  // should replace this with right addresses
 add["GEM_PIT"] = add["MCD_GOV"]  // should replace this with right addresses
-
-// add["LERP_HUMP"] = "0x0239311b645a8ef91dc899471497732a1085ba8b"
-
-//add["MCD_FLIP_USDC_PSM_A"] = "0x507420100393b1Dc2e8b4C8d0F8A13B56268AC99"
-
-// add["GOV_WALLET_1"] = "0x01D26f8c5cC009868A4BF66E268c17B057fF7A73"
-// add["GOV_WALLET_2"] = "0xC818Ae5f27B76b4902468C6B02Fd7a089F12c07b"
-// add["GOV_WALLET_3"] = "0xbfDD0E744723192f7880493b66501253C34e1241"
-// add["RISK_001_WALLET"] = "0xb386Bc4e8bAE87c3F67ae94Da36F385C100a370a"
-
-// add["SES_AUDIT_MULTISIG"] = "0x87AcDD9208f73bFc9207e1f6F0fDE906bcA95cc6"
-// add["SH_MULTISIG"] = "0xc657aC882Fb2D6CcF521801da39e910F8519508d"
-// add["SAS_WALLET"] = "0xb1f950a51516a697E103aaa69E152d839182f6Fe"
-// add["IS_WALLET"] = "0xd1F2eEf8576736C1EbA36920B957cd2aF07280F4"
-// add["DECO_WALLET"] = "0xF482D1031E5b172D42B2DAA1b6e5Cbf6519596f7"
-// MakerDAO Shop
-// add["TECH_001_WALLET"] = "0x2dC0420A736D1F40893B9481D8968E4D7424bC0B"
-// add["ORA_001_GAS"] = "0x2B6180b413511ce6e3DA967Ec503b2Cc19B78Db6"
-// add["ORA_001_GAS_EMERGENCY"] = "0x1A5B692029b157df517b7d21a32c8490b8692b0f"
-// add["DUX_001_WALLET"] = "0x5A994D8428CCEbCC153863CCdA9D2Be6352f89ad"
-// add["SF_001_WALLET"] = "0xf737C76D2B358619f7ef696cf3F94548fEcec379"
-// add["RWF_001_WALLET"] = "0x96d7b01Cc25B141520C717fa369844d34FF116ec"
-// add["SF_001_VEST_01"] = "0xBC7fd5AA2016C3e2C8F0dBf4e919485C6BBb59e2"
-// add["SF_001_VEST_02"] = "0xCC81578d163A04ea8d2EaE6904d0C8E61A84E1Bb"
-// add["CES_001_WALLET"] = "0x25307aB59Cd5d8b4E2C01218262Ddf6a89Ff86da"
-// add["GELATO_WALLET_OLD"] = "0x926c21602FeC84d6d0fA6450b40Edba595B5c6e4"
-// add["GELATO_WALLET"] = "0x478c7Ce3e1df09130f8D65a23AD80e05b352af62"
-// add["AMBASSADOR_WALLET"] = "0xF411d823a48D18B32e608274Df16a9957fE33E45"
-// add["EVENTS_WALLET"] = "0x3D274fbAc29C92D2F624483495C0113B44dBE7d2"
-// add["KEEP3R_MANAGER"] = "0xc6A048550C9553F8Ac20fbdeB06f114c27ECcabb"
-
 
 
 const reverseAddresses = Object.entries(add).reduce((add, [key, value]) => (add[value] = key, add), {})
@@ -89,7 +56,6 @@ const build = (address, name) => {
 }
 
 const multi = build(add.MULTICALL, "Multicall")
-const ilkRegistry = build(add.ILK_REGISTRY, "IlkRegistry")
 const vat = build(add.MCD_VAT, "Vat")
 const pot = build(add.MCD_POT, "Pot")
 const jug = build(add.MCD_JUG, "Jug")
@@ -104,11 +70,7 @@ const pause = build(add.MCD_PAUSE, "DSPause")
 const chief = build(add.CHIEF, "DSChief")
 const esm = build(add.MCD_ESM, "ESM")
 const end = build(add.MCD_END, "End")
-const vestDai = build(add.MCD_VEST_DAI, "DssVestSuckable")
-const vestMkr = build(add.MCD_VEST_MKR, "DssVestMintable")
-const vestMkrTreasury = build(add.MCD_VEST_MKR_TREASURY, "DssVestTransferrable")
 const weth = build(add.ETH, "ERC20")
-const wbtc = build(add.WBTC, "ERC20")
 const bkr = build(add.BKR, "ERC20")
 const dai = build(add.MCD_DAI, "Dai")
 const mkr = build(add.MCD_GOV, "DSToken")
@@ -122,10 +84,6 @@ const flop = build(add.MCD_FLOP, "Flopper")
 const pip = build(add.PIP_ETH, "OSM")
 const ethAIlkBytes = utils.formatBytes32String("ETH-A")
 const ethBIlkBytes = utils.formatBytes32String("ETH-B")
-const ethCIlkBytes = utils.formatBytes32String("ETH-C")
-const wbtcAIlkBytes = utils.formatBytes32String("WBTC-A")
-const wbtcBIlkBytes = utils.formatBytes32String("WBTC-B")
-const wbtcCIlkBytes = utils.formatBytes32String("WBTC-C")
 window.utils = utils
 window.add = add
 window.vat = vat
@@ -149,10 +107,6 @@ const DP10 = ethers.BigNumber.from("1000000000")
 const DP18 = ethers.BigNumber.from("1")
 
 const HOP = 3600 // assumes all OSM's have same hop
-
-const VEST_DAI_LEGACY_IDS = 0
-const VEST_DAI_IDS = 0
-const VEST_MKR_TREASURY_IDS = 0
 
 const subgraphClient = new GraphQLClient(
   "https://api.thegraph.com/subgraphs/name/protofire/maker-protocol",
@@ -260,23 +214,16 @@ class App extends Component {
       // .concat(this.getVestingCalls(add.MCD_VEST_MKR_TREASURY, vestMkrTreasury, VEST_MKR_TREASURY_IDS)) // 3, 55
       .concat(this.getIlkCall(ethAIlkBytes, 'ETH_A', weth, add.ETH, add.PIP_ETH)) // 17, 66
       .concat(this.getIlkCall(ethBIlkBytes, 'ETH_B', weth, add.ETH, add.PIP_ETH)) // 17, 83 
-      .concat(this.getIlkCall(ethCIlkBytes, 'ETH_C', weth, add.ETH, add.PIP_ETH)) // 17, 100
-      .concat(this.getIlkCall(wbtcAIlkBytes, 'WBTC_A', wbtc, add.WBTC, add.PIP_WBTC)) // 17, 117
-      .concat(this.getIlkCall(wbtcBIlkBytes, 'WBTC_B', wbtc, add.WBTC, add.PIP_WBTC)) // 17, 134
-      .concat(this.getIlkCall(wbtcCIlkBytes, 'WBTC_C', wbtc, add.WBTC, add.PIP_WBTC)) // 17, 151
       , { blockTag: blockNumber })
     let promises = [
       p1, // (0-151)
       this.etherscanEthSupply(),
       this.getPrice(add.PIP_ETH, this.POSITION_NXT),
       this.getPrice(add.MEDIAN_ETH, this.POSITION_MEDIAN_VAL),
-      this.getPrice(add.PIP_WBTC, this.POSITION_NXT),
-      this.getPrice(add.MEDIAN_WBTC, this.POSITION_MEDIAN_VAL),
       // this.getHistoricalDebt({ blockInterval: 45500 /* ≈ 7 day */, periods: 52 /* 12 months */ }),
     ]
 
-    let [[block, res], ethSupply, ethPriceNxt, ethPriceMedian,
-      wbtcPriceNxt, wbtcPriceMedian, historicalDebt] = await Promise.all(promises)
+    let [[block, res], ethSupply, ethPriceNxt, ethPriceMedian, historicalDebt] = await Promise.all(promises)
 
     var offset = 0;
 
@@ -363,10 +310,6 @@ class App extends Component {
       // this.getIlkMap(res, offset += (VEST_MKR_TREASURY_IDS * VEST_CALL_COUNT), "ETH", "ETH-A", weth, 18, base, ethPriceNxt, ethPriceMedian, DP10),
       this.getIlkMap(res, offset, "ETH", "ETH-A", weth, 18, base, ethPriceNxt, ethPriceMedian, DP10),
       this.getIlkMap(res, offset += ILK_CALL_COUNT, "ETH", "ETH-B", weth, 18, base, ethPriceNxt, ethPriceMedian, DP10),
-      this.getIlkMap(res, offset += ILK_CALL_COUNT, "ETH", "ETH-C", weth, 18, base, ethPriceNxt, ethPriceMedian, DP10),
-      this.getIlkMap(res, offset += ILK_CALL_COUNT, "WBTC", "WBTC-A", wbtc, 8, base, wbtcPriceNxt, wbtcPriceMedian, DP10, DP8),
-      this.getIlkMap(res, offset += ILK_CALL_COUNT, "WBTC", "WBTC-B", wbtc, 8, base, wbtcPriceNxt, wbtcPriceMedian, DP10, DP8),
-      this.getIlkMap(res, offset += ILK_CALL_COUNT, "WBTC", "WBTC-C", wbtc, 8, base, wbtcPriceNxt, wbtcPriceMedian, DP10, DP8),
     ]
 
     const ilksByName = ilks.reduce((a, x) => ({ ...a, [x.ilk]: x }), {})
@@ -644,53 +587,6 @@ class App extends Component {
   getPrice = async (osm, position) => {
     const val = await eth.getStorageAt(osm, position);
     return ethers.BigNumber.from('0x' + val.substring(34));
-  }
-
-  getMarketPrices = async () => {
-    // const json = await jsonFetch('https://api.coingecko.com/api/v3/simple/price?ids=maker%2Cdai&vs_currencies=usd');
-    const json = {}
-    return json;
-  }
-
-  getHistoricalDebt = async ({ blockInterval, periods }) => {
-    try {
-      const latestBlock = await (provider ?? eth).getBlockNumber()
-
-      if (latestBlock) {
-        const numberOfPoints = periods ?? latestBlock / blockInterval
-
-        if (numberOfPoints > 0) {
-          const result = new Array(numberOfPoints)
-
-          const fragments = Array.from({ length: numberOfPoints }, (v, i) => {
-            const block = latestBlock - (i + 1) * blockInterval
-
-            return `
-            _${numberOfPoints - i}_${block}: systemState(block: { number: ${block}}, id: "current") {
-              block
-              timestamp
-              totalDebt
-              debtCeiling: totalDebtCeiling
-            }
-          `
-          })
-
-          const data = await subgraphClient.request(gql`{${fragments.concat()}}`)
-
-          Object.entries(data).forEach(([key, value]) => {
-            const [, index, block] = key.split("_")
-
-            result[+index - 1] = { block: +block, ...value }
-          })
-
-          return result
-        }
-      }
-    } catch (err) {
-      console.error("Historical debt could not be obtained due to an error.", err)
-    }
-
-    return null
   }
 
   render() {

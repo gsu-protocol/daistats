@@ -147,10 +147,6 @@ const Main = (props) => {
               <TabPanel>
                 <Collateral {...props} ilk="ETH-A" supply={props.ethSupply} />
                 <Collateral {...props} ilk="ETH-B" supply={props.ethSupply} />
-                <Collateral {...props} ilk="ETH-C" supply={props.ethSupply} />
-                <Collateral {...props} ilk="WBTC-A" />
-                <Collateral {...props} ilk="WBTC-B" />
-                <Collateral {...props} ilk="WBTC-C" />
               </TabPanel>
               <TabPanel>
                 {/* <Collateral {...props} ilk="UNIV2USDCETH-A" showLockedDecimals={true} />
@@ -255,7 +251,6 @@ const Main = (props) => {
             <div className="columns">
               <Pip {...props} token="ETH" ilk="ETH-A" formater={formatTwoDp} />
               {/* <Pip {...props} token="wstETH" ilk="WSTETH-A" formater={formatTwoDp} /> */}
-              <Pip {...props} token="BTC" ilk="WBTC-A" formater={formatTwoDp} />
             </div>
             {/* <div className="columns">
           <Pip {...props} token="LINK" ilk="LINK-A" formater={formatTwoDp} />
@@ -367,10 +362,6 @@ const Main = (props) => {
                   <tbody>
                     <Clip {...props} token="ETH-A" ilk="ETH-A" />
                     <Clip {...props} token="ETH-B" ilk="ETH-B" />
-                    <Clip {...props} token="ETH-C" ilk="ETH-C" />
-                    <Clip {...props} token="WBTC-A" ilk="WBTC-A" />
-                    <Clip {...props} token="WBTC-B" ilk="WBTC-B" />
-                    <Clip {...props} token="WBTC-C" ilk="WBTC-C" />
                   </tbody>
                 </table>
               </div>
@@ -726,10 +717,6 @@ const Main = (props) => {
               </div>
               <div className="column">
                 <div className="box has-text-centered">
-                  <a href={`${ETHERSCAN_URL}/token/${props.WBTC}`} target="_blank" rel="noopener noreferrer">
-                    <h3 className="title"><i className="fal fa-file-code"></i> WBTC</h3>
-                    <p className="subtitle is-size-7">{props.WBTC}</p>
-                  </a>
                 </div>
               </div>
             </div>
